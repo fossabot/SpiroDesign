@@ -21,7 +21,7 @@ public class SpiroModel extends Model implements Runnable {
 	private SpiroIO spiroIO;
 
 	public SpiroModel() {
-
+		super();
 	}
 
 	public void SpiroModel(Cons aList) {

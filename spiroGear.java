@@ -1,4 +1,4 @@
-public class spiroGear extends Object {
+public class SpiroGear extends Object {
 
 	private Double center;
 
@@ -16,9 +16,9 @@ public class spiroGear extends Object {
 
 	}
 
-	public SpiroGear(Double p, Double r) {
-
-	}
+	// public SpiroGear(Double p, Double r) {
+	//
+	// }
 
 	public SpiroGear(Double r) {
 

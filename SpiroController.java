@@ -4,8 +4,8 @@ public class SpiroController extends Controller implements ActionListener {
 
 	private int pickingArea;
 
-	public void SpiroController() {
-
+	public SpiroController() {
+		super();
 	}
 
 	public void actionPerformed(ActionEvent anActionEvent) {
@@ -17,11 +17,11 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	public void mouseClicked(MouseEvent aMouseEvent) {
-
+		super();
 	}
 
 	public void mouseDragged(MouseEvent aMouseEvent) {
-
+		super();
 	}
 
 	public void mouseMoved(MouseEvent aMouseEvent) {

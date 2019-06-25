@@ -1,6 +1,6 @@
-public class SpurGear extends spiroGear {
+public class SpurGear extends SpiroGear {
 
-	public spurGear() {
+	public SpurGear() {
 
 	}
 

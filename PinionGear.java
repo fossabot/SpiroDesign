@@ -1,4 +1,4 @@
-public class PinionGear extends spiroGear {
+public class PinionGear extends SpiroGear {
 
 	private Double penPosition;
 
