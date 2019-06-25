@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Point;
@@ -24,35 +23,6 @@ public class Controller extends MouseInputAdapter implements MouseWheelListener
 	protected View view;
 
 	/**
-=======
-package mvc;
-
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import javax.swing.event.MouseInputAdapter;
-
-/**
- * コントローラ。制御まわりを専門に行う。
- */
-public class Controller extends MouseInputAdapter implements MouseWheelListener
-{
-	/**
-	 * 情報を握っているModelのインスタンスを束縛する。
-	 */
-	protected Model model;
-
-	/**
-	 * 表示を司るViewのインスタンスを束縛する。
-	 */
-	protected View view;
-
-	/**
->>>>>>> 5b6b27f5a65c12dff2b5023055447300a3141848
 	 * 以前にマウスのボタンが押下された場所をPointのインスタンスとして束縛する。
 	 */
 	private Point previous;

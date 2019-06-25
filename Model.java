@@ -1,18 +1,8 @@
-<<<<<<< HEAD
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-=======
-package mvc;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-
->>>>>>> 5b6b27f5a65c12dff2b5023055447300a3141848
 /**
  * モデル。データ管理を専門に行う。
  */

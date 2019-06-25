@@ -68,8 +68,6 @@ public class Example extends Object {
 			aWindow.toFront();
 		//}
 
-		aView.displaySpurGear(aGraphics, 200, 200);
-
 		return;
 	}
 
