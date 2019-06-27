@@ -24,9 +24,9 @@ public class SpiroGear extends Object {
 
 	}
 
-	// public SpiroGear(Double p, Double r) {
-	//
-	// }
+	 //public SpiroGear(Double p, Double r) {
+
+	 //}
 
 	public SpiroGear(Double r) {
 

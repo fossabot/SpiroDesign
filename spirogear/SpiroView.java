@@ -31,12 +31,14 @@ public class SpiroView extends View {
 	}
 
 	public void displaySpurGear(Graphics aGraphics, int aX, int aY) {
-		aGraphics.drawOval(10, 10, 100, 50);
-  	aGraphics.drawArc(20, 20, 120, 70, 45, 180);
+
 	}
 
 	public void paintComponent(Graphics aGraphics) {
-
+		int aX=this.getWidth();
+		int aY=this.getHeight();
+		int spurRadius=200;
+		aGraphics.drawOval(aX/2-spurRadius/2, aY/2-spurRadius/2, spurRadius, spurRadius);
 	}
 
 	public String toString() {

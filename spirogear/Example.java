@@ -50,7 +50,7 @@ public class Example extends Object {
 			aWindow.getContentPane().add(aView);
 
 			// 高さはタイトルバーの高さを考慮してウィンドウの大きさを決定する。
-			aWindow.addNotify();
+			//aWindow.addNotify();
 			Integer titleBarHeight = aWindow.getInsets().top;
 			//width = aDimension.width;
 			//height = aDimension.height + titleBarHeight;
@@ -61,8 +61,8 @@ public class Example extends Object {
 			aWindow.setMinimumSize(new Dimension(400, 300 + titleBarHeight));
 			aWindow.setResizable(true);
 			aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			//x = displayPoint.x + (index * offsetPoint.x);
-			//y = displayPoint.y + (index * offsetPoint.y);
+			x = displayPoint.x + offsetPoint.x;
+			y = displayPoint.y + offsetPoint.y;
 			aWindow.setLocation(x, y);
 			aWindow.setVisible(true);
 			aWindow.toFront();
