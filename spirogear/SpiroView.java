@@ -1,5 +1,3 @@
-
-
 import java.awt.Point;
 import java.awt.Graphics;
 import javax.swing.JFrame;

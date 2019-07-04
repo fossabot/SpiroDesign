@@ -1,4 +1,4 @@
-package spirogear.Cons.cons;
+package Cons.cons;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package spirogear.Cons.cons;
+package Cons.cons;
 
 import java.io.IOException;
 import java.io.StringReader;

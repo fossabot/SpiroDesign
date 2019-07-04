@@ -1,9 +1,6 @@
-
 import MVC.mvc.Model;
 import MVC.mvc.Controller;
 import MVC.mvc.View;
-// import spirogear.SpiroView;
-// import spirogear.SpiroModel;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

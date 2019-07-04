@@ -1,4 +1,3 @@
-
 public class Constants extends Object {
 
 	public static int No = 0;
