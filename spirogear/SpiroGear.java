@@ -30,7 +30,13 @@ public class SpiroGear extends Object {
 
   //public SpiroGear(Double p, Double r) {
 
+<<<<<<< HEAD
   //}
+=======
+	 //public SpiroGear(Double p, Double r) {
+
+	 //}
+>>>>>>> 511f3e45910631b94569e9b7966eae3bffdc628d
 
  public SpiroGear(Double r) {
 

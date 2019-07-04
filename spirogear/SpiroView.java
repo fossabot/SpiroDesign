@@ -48,6 +48,7 @@ public class SpiroView extends View {
 	}
 
 	public void paintComponent(Graphics aGraphics) {
+<<<<<<< HEAD
 		Integer width;
 		Integer height;
 		Integer x = 300;
@@ -90,6 +91,12 @@ public class SpiroView extends View {
 		bfg.fillOval(x + spur_r + (int)((spur_r - pinion_r) * Math.cos(rotation_radian * Math.PI / 180) + distanse_PentoPiniongearcenter * Math.cos((spur_r - pinion_r) * (radian_PentoPiniongearcenter) / pinion_r)), y + spur_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180) - distanse_PentoPiniongearcenter * Math.sin((spur_r - pinion_r) * (radian_PentoPiniongearcenter) / pinion_r)), 3, 3);
 
 		rotation_radian -= 1;
+=======
+		int aX=this.getWidth();
+		int aY=this.getHeight();
+		int spurRadius=200;
+		aGraphics.drawOval(aX/2-spurRadius/2, aY/2-spurRadius/2, spurRadius, spurRadius);
+>>>>>>> 511f3e45910631b94569e9b7966eae3bffdc628d
 	}
 
 	public String toString() {
