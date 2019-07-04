@@ -1,6 +1,9 @@
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
+
+import MVC.mvc.Model;
+import MVC.mvc.Controller;
+import MVC.mvc.View;
+// import spirogear.SpiroView;
+// import spirogear.SpiroModel;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,19 +14,37 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.event.MouseInputAdapter;
+import javax.swing.JPopupMenu;
+import javax.swing.JMenuItem;
 
 public class SpiroController extends Controller implements ActionListener {
 
-	private boolean isMenuPopuping;
-
 	private int pickingArea;
+
+		/**
+	 * 情報を握っているModelのインスタンスを束縛する。
+	 */
+	protected Model model;
+
+	/**
+	 * 表示を司るViewのインスタンスを束縛する。
+	 */
+	protected View view;
+
+	protected SpiroView sview;
+
+	protected SpiroModel smodel;
 
 	public SpiroController() {
 		super();
+		this.model = null;
+		this.view = null;
+		this.sview = null;
+		this.smodel = null;
+		return;
 	}
 
 	public void actionPerformed(ActionEvent anActionEvent) {
-
 	}
 
 	public Point convertViewPointToModelPoint(Point aPoint) {
@@ -35,17 +56,12 @@ public class SpiroController extends Controller implements ActionListener {
 	 * @param aMouseEvent
 	 */
 	public void mouseClicked(MouseEvent aMouseEvent) {
-		int btn = aMouseEvent.getButton();
-
-  if (btn == MouseEvent.BUTTON1){
-		// 左クリックの処理
-		
-  }else if (btn == MouseEvent.BUTTON3){
-		Point aPoint = aMouseEvent.getPoint();
-		this.showPopupMenu(aPoint, aMouseEvent);
-		System.out.println("右クリック");
-		System.out.println(aPoint);
-  	}
+		if (aMouseEvent.getButton() == MouseEvent.BUTTON3){
+			this.sview.isMenuPopuping = true;
+			this.sview.MenuMouseEvent = aMouseEvent;
+			this.sview.showPopupMenu();
+			return;	
+			}
 	}
 
 	public void mouseDragged(MouseEvent aMouseEvent) {
@@ -64,14 +80,43 @@ public class SpiroController extends Controller implements ActionListener {
 
 	}
 
-	public void showPopupMenu(Point aPoint, MouseEvent aMouseEvent) {
 
+
+	/**
+	 * 指定されたモデルをインスタンス変数modelに設定する。
+	 * @param aModel このコントローラのモデル
+	 */
+	public void setModel(SpiroModel aModel)
+	{
+		this.smodel = aModel;
 		return;
 	}
 
-	public String toString() {
-		return null;
+		/**
+	 * 指定されたビューをインスタンス変数viewに設定し、
+	 * ビューのマウスのリスナおよびモーションリスナそしてホイールリスナをこのコントローラにする。
+	 * @param aView このコントローラのビュー
+	 */
+	public void setView(SpiroView aView)
+	{
+		this.sview = aView;
+		this.sview.addMouseListener(this);
+		this.sview.addMouseMotionListener(this);
+		this.sview.addMouseWheelListener(this);
+		return;
 	}
+
+
+	public String toString() {
+		StringBuffer aBuffer = new StringBuffer();
+		Class<?> aClass = this.getClass();
+		aBuffer.append(aClass.getName());
+		aBuffer.append("[model=");
+		aBuffer.append(this.smodel);
+		aBuffer.append(",view=");
+		aBuffer.append(this.sview);
+		aBuffer.append("]");
+		return aBuffer.toString();	}
 
 	private void whichPickingArea(Point aPoint) {
 

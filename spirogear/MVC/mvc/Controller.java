@@ -1,4 +1,4 @@
-package spirogear.MVC.mvc;
+package MVC.mvc;
 
 import java.awt.Component;
 import java.awt.Cursor;

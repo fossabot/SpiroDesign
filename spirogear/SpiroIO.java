@@ -1,6 +1,7 @@
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
+
+import MVC.mvc.Model;
+import MVC.mvc.Controller;
+import MVC.mvc.View;
 
 public class SpiroIO extends Object {
 

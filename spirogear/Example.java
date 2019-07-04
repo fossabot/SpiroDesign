@@ -1,3 +1,4 @@
+
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -5,9 +6,9 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
+import MVC.mvc.Model;
+import MVC.mvc.Controller;
+import MVC.mvc.View;
 
 public class Example extends Object {
 

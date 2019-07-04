@@ -1,4 +1,4 @@
-package spirogear.MVC.mvc;
+package MVC.mvc;
 
 import java.awt.Dimension;
 import java.awt.Point;

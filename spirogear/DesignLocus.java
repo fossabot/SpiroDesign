@@ -1,5 +1,6 @@
-import spirogear.Cons.cons.Cons;
-import spirogear.Cons.cons.Symbol;
+
+import Cons.cons.Cons;
+import Cons.cons.Symbol;
 import java.util.Vector;
 import java.util.Hashtable;
 

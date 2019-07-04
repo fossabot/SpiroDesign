@@ -1,4 +1,4 @@
-package spirogear.MVC.mvc;
+package MVC.mvc;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

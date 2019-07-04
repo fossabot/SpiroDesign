@@ -1,8 +1,9 @@
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
-import spirogear.Cons.cons.Cons;
-import spirogear.Cons.cons.Symbol;
+
+import MVC.mvc.Model;
+import MVC.mvc.Controller;
+import MVC.mvc.View;
+import Cons.cons.Cons;
+import Cons.cons.Symbol;
 import java.awt.Rectangle;
 import java.util.Hashtable;
 

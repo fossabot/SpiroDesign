@@ -1,9 +1,11 @@
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
-import spirogear.Cons.cons.Cons;
+
+import MVC.mvc.Model;
+import MVC.mvc.Controller;
+import MVC.mvc.View;
+// import javafx.beans.binding.BooleanBinding;
+import Cons.cons.Cons;
 import java.awt.Point;
-import spirogear.Cons.cons.Symbol;
+import Cons.cons.Symbol;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -29,12 +31,33 @@ public class SpiroModel extends Model implements Runnable {
 
 	private SpiroIO spiroIO;
 
+
 	public SpiroModel() {
 		super();
+		this.initialize();
+		return;
 	}
 
 	public void SpiroModel(Cons aList) {
 
+	}
+
+		/**
+	 * 指定されたビューを依存物に設定する。
+	 * @param aView このモデルの依存物となるビュー
+	 */
+	public void addDependent(View aView)
+	{
+		this.dependents.add(aView);
+		return;
+	}
+
+		/**
+	 * 初期化する。
+	 */
+	private void initialize()
+	{
+		return;
 	}
 
 	public DesignLocus designLocus() {
@@ -170,11 +193,13 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	public void spiroStart() {
-
+		System.out.println("start");
+		return;
 	}
 
 	public void spiroStop() {
-
+		System.out.println("stop");
+		return;
 	}
 
 	public void spurCenter(Point aPoint) {

@@ -1,7 +1,7 @@
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
-import spirogear.Cons.cons.Cons;
+import MVC.mvc.Model;
+import MVC.mvc.Controller;
+import MVC.mvc.View;
+import Cons.cons.Cons;
 
 public class SpurGear extends SpiroGear {
 
