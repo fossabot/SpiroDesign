@@ -4,10 +4,10 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.awt.Graphics;
 import javax.swing.JFrame;
-import java.awt.Container;
-
+import spirogear.MVC.mvc.Model;
+import spirogear.MVC.mvc.Controller;
+import spirogear.MVC.mvc.View;
 
 public class Example extends Object {
 
@@ -23,6 +23,7 @@ public class Example extends Object {
 			System.err.println(anException);
 			throw new RuntimeException(anException.toString());
 		}
+		BufferedImage anImage = aRobot.createScreenCapture(new Rectangle(screenSize));
 
 		//コントローラを作る。
 		SpiroController aController = new SpiroController();
@@ -47,10 +48,9 @@ public class Example extends Object {
 			SpiroView aView = new SpiroView(aModel, aController);
 			JFrame aWindow = new JFrame("spirodesign");
 			aWindow.getContentPane().add(aView);
-			Graphics aGraphics = aWindow.getContentPane().getGraphics();
 
 			// 高さはタイトルバーの高さを考慮してウィンドウの大きさを決定する。
-			aWindow.addNotify();
+			//aWindow.addNotify();
 			Integer titleBarHeight = aWindow.getInsets().top;
 			//width = aDimension.width;
 			//height = aDimension.height + titleBarHeight;
@@ -68,7 +68,18 @@ public class Example extends Object {
 			aWindow.toFront();
 		//}
 
-		aView.displaySpurGear(aGraphics, 200, 200);
+		for(Integer i = 0; i <= 360000; i++) {
+			try
+			{
+				Thread.sleep(10);
+			}
+			catch (InterruptedException anException)
+			{
+				System.err.println(anException);
+				throw new RuntimeException(anException.toString());
+			}
+			aModel.changed();
+		}
 
 		return;
 	}

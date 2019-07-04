@@ -1,4 +1,15 @@
+import spirogear.MVC.mvc.Model;
+import spirogear.MVC.mvc.Controller;
+import spirogear.MVC.mvc.View;
+import spirogear.Cons.cons.Cons;
+import java.awt.Point;
+import spirogear.Cons.cons.Symbol;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 public class SpiroModel extends Model implements Runnable {
+
+	private SpiroGear spiroGear;
 
 	private SpurGear spurGear;
 
@@ -22,6 +33,7 @@ public class SpiroModel extends Model implements Runnable {
 
 	public SpiroModel() {
 		super();
+		this.spiroGear = new SpiroGear();
 	}
 
 	public void SpiroModel(Cons aList) {
@@ -169,7 +181,10 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	public void spurCenter(Point aPoint) {
-
+		double x = (double)aPoint.x;
+		double y = (double)aPoint.y;
+		spiroGear.center(x,y);
+		this.spurRadius(aPoint);
 	}
 
 	public Double spurDegrees(double pinionDegrees) {
@@ -181,7 +196,8 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	public void spurRadius(Point aPoint) {
-
+		double x = (double)aPoint.x;
+ 		this.spiroGear.radius(x);
 	}
 
 	public Cons toList() {

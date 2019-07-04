@@ -1,3 +1,9 @@
+import spirogear.Cons.cons.Cons;
+import spirogear.Cons.cons.Symbol;
+import java.util.Vector;
+import java.util.Hashtable;
+
+
 public class DesignLocus extends Object {
 
 	private SpurGear spurGear;

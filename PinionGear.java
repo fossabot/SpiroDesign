@@ -1,3 +1,12 @@
+import spirogear.MVC.mvc.Model;
+import spirogear.MVC.mvc.Controller;
+import spirogear.MVC.mvc.View;
+import spirogear.Cons.cons.Cons;
+import java.awt.Color;
+import spirogear.Cons.cons.Symbol;
+import java.awt.Rectangle;
+import java.util.Hashtable;
+
 public class PinionGear extends SpiroGear {
 
 	private Double penPosition;

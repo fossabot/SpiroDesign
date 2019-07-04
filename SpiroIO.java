@@ -1,3 +1,7 @@
+import spirogear.MVC.mvc.Model;
+import spirogear.MVC.mvc.Controller;
+import spirogear.MVC.mvc.View;
+
 public class SpiroIO extends Object {
 
 	private static String directory = null;
