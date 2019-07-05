@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,12 +35,12 @@ public class MenuItemAction implements ActionListener {
         this.smodel.spiroStop();
       }
       else if(text.equals("picker")) {
-        System.out.println("ok");
         this.sview.showPopupMenu();
         this.smodel.spiroColor(sview);
       }
       else if(text.equals("rainbow")) {
         this.sview.showPopupMenu();
+        this.smodel.spiroColor = new Color(255, 0, 0);
         this.smodel.isRainbow = true;
       }
       else if(text.equals("thick")) {

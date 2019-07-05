@@ -6,10 +6,11 @@ import java.awt.Color;
 import Cons.cons.Symbol;
 import java.awt.Rectangle;
 import java.util.Hashtable;
+import java.awt.geom.Point2D;
 
 public class PinionGear extends SpiroGear {
 
-	private Double penPosition;
+	private Point2D.Double penPosition;
 
 	private Color penColor;
 
@@ -18,12 +19,14 @@ public class PinionGear extends SpiroGear {
 	private Double degrees;
 
 	public PinionGear() {
-
+		super();
+		Point2D.Double firstPoint = new Point2D.Double(700,150);
+		this.center(firstPoint,25.0);
 	}
 
-	public PinionGear(Cons aList) {
-
-	}
+	// public PinionGear(Cons aList) {
+	//
+	// }
 
 	public PinionGear(Double p, Double r, Double uv) {
 
@@ -45,9 +48,9 @@ public class PinionGear extends SpiroGear {
 		return null;
 	}
 
-	public Hashtable<Symbol,Object> fromList(Cons aList) {
-		return null;
-	}
+	// public Hashtable<Symbol,Object> fromList(Cons aList) {
+	// 	return null;
+	// }
 
 	public Double left() {
 		return null;
@@ -69,8 +72,8 @@ public class PinionGear extends SpiroGear {
 
 	}
 
-	public Double penPosition() {
-		return null;
+	public Point2D.Double penPosition() {
+		return this.penPosition;
 	}
 
 	public void penPosition(Double x, Double y) {

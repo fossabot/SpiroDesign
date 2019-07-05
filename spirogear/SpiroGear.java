@@ -5,19 +5,20 @@ import Cons.cons.Cons;
 import Cons.cons.Symbol;
 import java.awt.Rectangle;
 import java.util.Hashtable;
+import java.awt.Point;
+import java.awt.geom.Point2D;
 
 public class SpiroGear extends Object {
 
-	private Double center;
+	private Point2D.Double center;
 
 	private Double radius;
 
 	public SpiroGear() {
-
+		//System.out.println("test");
 	}
 
 	public SpiroGear(Double x, Double y) {
-
 	}
 
 	public SpiroGear(Double x, Double y, Double r) {
@@ -40,12 +41,13 @@ public class SpiroGear extends Object {
 		return null;
 	}
 
-	public Double center() {
-		return null;
+	public Point2D.Double center() {
+		return this.center;
 	}
 
-	public void center(Double x, Double y) {
-
+	public void center(Point2D.Double x, Double y) {
+		this.center = x;
+		this.radius = y;
 	}
 
 	public Rectangle centerRectangle() {
@@ -56,9 +58,9 @@ public class SpiroGear extends Object {
 		return null;
 	}
 
-	public Hashtable<Symbol,Object> fromList(Cons aList) {
-		return null;
-	}
+	// public Hashtable<Symbol,Object> fromList(Cons aList) {
+	// 	return null;
+	// }
 
 	public Double left() {
 		return null;
@@ -69,11 +71,15 @@ public class SpiroGear extends Object {
 	}
 
 	public Double radius() {
-		return null;
+		return this.radius;
 	}
 
 	public void radius(Double r) {
-
+		this.radius = this.radius+r;
+		if(this.radius<50){
+			this.radius=50.0;
+		}
+		System.out.println(radius);
 	}
 
 	public Double right() {
@@ -104,9 +110,9 @@ public class SpiroGear extends Object {
 		return null;
 	}
 
-	public Cons toList() {
-		return null;
-	}
+	// public Cons toList() {
+	// 	return null;
+	// }
 
 	public String toString() {
 		return null;

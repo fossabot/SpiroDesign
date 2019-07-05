@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.event.MouseInputAdapter;
+import java.awt.geom.Point2D;
 
 public class SpiroController extends Controller implements ActionListener {
 
@@ -26,16 +27,26 @@ public class SpiroController extends Controller implements ActionListener {
 	 */
 	protected View view;
 
-	protected SpiroView sview;
-
+	/** 
+	 * 情報を握っているModelのインスタンスを束縛する。
+	 */
 	protected SpiroModel smodel;
+
+	private Point spiroprevious;
+
+	private Point spirocurrent;
+
+	/**
+	 * 表示を司るViewのインスタンスを束縛する。
+	 */
+	protected SpiroView sview;
 
 	public SpiroController() {
 		super();
 		this.model = null;
 		this.view = null;
 		this.sview = null;
-		this.smodel = null;
+		this.smodel = new SpiroModel();
 		return;
 	}
 
@@ -51,9 +62,16 @@ public class SpiroController extends Controller implements ActionListener {
 	 * @param aMouseEvent
 	 */
 	public void mouseClicked(MouseEvent aMouseEvent) {
+		int btn = aMouseEvent.getButton();
 
+		if (btn == MouseEvent.BUTTON1){
+			Point aPoint = aMouseEvent.getPoint();
+			System.out.println("左クリック");
+      System.out.println(aPoint);
+    }
+      
 		// 右クリックが行われた際、その座標を獲得してその位置にメニューを表示するようViewに依頼する。
-		if (aMouseEvent.getButton() == MouseEvent.BUTTON3){
+		if (btn == MouseEvent.BUTTON3){
 			this.sview.isMenuPopuping = true;
 			this.sview.MenuMouseEvent = aMouseEvent;
 			this.sview.showPopupMenu();
@@ -62,7 +80,18 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	public void mouseDragged(MouseEvent aMouseEvent) {
-
+		Cursor aCursor = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
+		Component aComponent = (Component)aMouseEvent.getSource();
+		aComponent.setCursor(aCursor);
+		this.spirocurrent = aMouseEvent.getPoint();
+		this.whichPickingArea(this.spirocurrent);
+		Integer x = this.spirocurrent.x - this.spiroprevious.x;
+		Integer y = this.spirocurrent.y - this.spiroprevious.y;
+		Point aPoint = new Point(x, y);
+		this.smodel.spurCenter(aPoint);
+		this.scrollBy(aPoint, aMouseEvent);
+		this.spiroprevious = this.spirocurrent;
+		return;
 	}
 
 	public void mouseMoved(MouseEvent aMouseEvent) {
@@ -74,7 +103,12 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	public void mouseReleased(MouseEvent aMouseEvent) {
-
+		Cursor aCursor = Cursor.getDefaultCursor();
+		Component aComponent = (Component)aMouseEvent.getSource();
+		aComponent.setCursor(aCursor);
+		this.spirocurrent = aMouseEvent.getPoint();
+		this.spiroprevious = this.spirocurrent;
+		return;
 	}
 
 
@@ -116,7 +150,16 @@ public class SpiroController extends Controller implements ActionListener {
 		return aBuffer.toString();	}
 
 	private void whichPickingArea(Point aPoint) {
+		Point2D.Double spurCenter = this.smodel.spurSendCenter();
+		Double spurRadius = this.smodel.spurSendRadius();
+		Integer x = this.spirocurrent.x - this.spiroprevious.x;
+		Integer y = this.spirocurrent.y - this.spiroprevious.y;
+		Point movePoint = new Point(x,y);
+		if((spurCenter.x-spurRadius+5>=aPoint.x)&&(spurCenter.x-spurRadius-5<=aPoint.x)&&(spurCenter.y+5>=aPoint.y)&&(spurCenter.y-5<=aPoint.y)){
+			this.smodel.spurRadius(movePoint);
+		}else if((spurCenter.x+5>=aPoint.x)&&(spurCenter.x-5<=aPoint.x)&&(spurCenter.y+5>=aPoint.y)&&(spurCenter.y-5<=aPoint.y)){
 
+		}
 	}
 
 }

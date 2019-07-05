@@ -1,7 +1,6 @@
 import MVC.mvc.Model;
 import MVC.mvc.Controller;
 import MVC.mvc.View;
-// import javafx.beans.binding.BooleanBinding;
 import Cons.cons.Cons;
 import java.awt.Point;
 import java.awt.Color;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
-
+import java.awt.geom.Point2D;
 
 public class SpiroModel extends Model implements Runnable {
 
@@ -34,23 +33,24 @@ public class SpiroModel extends Model implements Runnable {
 
 	private SpiroIO spiroIO;
 
-	private Color spiroColor;
+	private SpiroGear spiroGear;
+
+	public Color spiroColor;
 
 	private Thread thread;
 
 	public SpiroModel() {
 		super();
+		this.spiroGear = new SpiroGear();
+		this.spurGear = new SpurGear();
+		this.pinionGear = new PinionGear();
 		this.isAnimated = false;
 		this.tickTime = 500;
-		this.thread = new Thread();
+		this.thread = new Thread(this);
 		this.isRainbow = false;
-		this.spiroColor = Color.black;
+		this.spiroColor = new Color(0,0,0);
 		// this.spiroGear = new SpiroGear();
 }
-
-	public void SpiroModel(Cons aList) {
-
-	}
 
 		/**
 	 * 指定されたビューを依存物に設定する。
@@ -59,14 +59,6 @@ public class SpiroModel extends Model implements Runnable {
 	public void addDependent(View aView)
 	{
 		this.dependents.add(aView);
-		return;
-	}
-
-		/**
-	 * 初期化する。
-	 */
-	private void initialize()
-	{
 		return;
 	}
 
@@ -84,10 +76,6 @@ public class SpiroModel extends Model implements Runnable {
 
 	public void flush() {
 
-	}
-
-	public Hashtable<Symbol,Object> fromList(Cons aList) {
-		return null;
 	}
 
 	public boolean isAnimated() {
@@ -157,10 +145,12 @@ public class SpiroModel extends Model implements Runnable {
 		while(isAnimated){
 				try
 				{
+
 						Thread.sleep(tickTime);
 						if(isRainbow = true){
 							spiroRainbow();
 						}
+
 				}
 				catch (InterruptedException anException)
 				{
@@ -169,6 +159,7 @@ public class SpiroModel extends Model implements Runnable {
 				}
 				super.changed();
 		}
+		return;
 }
 
 	public void spiroClear() {
@@ -210,7 +201,16 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	public void spiroRainbow() {
-		spiroColor = new Color(spiroColor.getRed()+1, spiroColor.getGreen()+1, spiroColor.getBlue()+1);
+		int r = spiroColor.getRed();
+		int g = spiroColor.getGreen();
+		int b = spiroColor.getBlue();
+		if(r == 255 && g >= 0 && g < 255 && b == 0){ spiroColor = new Color(r, g+1, b); }
+		else if(r > 0 && r <= 255 && g == 255 && b == 0){ spiroColor = new Color(r-1, g, b); }
+		else if(r == 0 && g == 255 && b >= 0 && b < 255){ spiroColor = new Color(r, g, b+1); }
+		else if(r == 0 && g <= 255 && g > 0 && b == 255){ spiroColor = new Color(r, g-1, b); }
+		else if(r >= 0 && r < 255 && g == 0 && b == 255){ spiroColor = new Color(r+1, g, b); }
+		else if(r == 255 && g == 0 && b <= 255 && b > 0){ spiroColor = new Color(r, g, b-1); }
+
 		return;
 	}
 
@@ -231,14 +231,21 @@ public class SpiroModel extends Model implements Runnable {
 
 	public void spiroStart() {
 		thread.start();
+		return;
 }
 
 public void spiroStop() {
 		this.isAnimated = false;
+		this.thread = new Thread(this);
+		return;
 }
 
 	public void spurCenter(Point aPoint) {
-
+		Double x = Double.valueOf(aPoint.x);
+		Double y = Double.valueOf(aPoint.y);
+		//this.spiroGear.center(x,y);
+		this.spurRadius(aPoint);
+		return;
 	}
 
 	public Double spurDegrees(double pinionDegrees) {
@@ -250,11 +257,34 @@ public void spiroStop() {
 	}
 
 	public void spurRadius(Point aPoint) {
-
+		double x = (double)aPoint.x;
+		this.spurGear.radius(x);
+		return;
 	}
 
-	public Cons toList() {
-		return null;
+	public Point2D.Double spurSendCenter() {
+		Point2D.Double center = this.spurGear.center();
+		return center;
+	}
+
+	public Double spurSendRadius() {
+		Double radius = this.spurGear.radius();
+		return radius;
+	}
+
+	public Point2D.Double pinionSendCenter() {
+		Point2D.Double center = this.pinionGear.center();
+		return center;
+	}
+
+	public Double pinionSendRadius() {
+		Double radius = this.pinionGear.radius();
+		return radius;
+	}
+
+	public Point2D.Double sendpenPosition(){
+		Point2D.Double penPosition = this.pinionGear.penPosition();
+		return penPosition;
 	}
 
 	public String toString() {
