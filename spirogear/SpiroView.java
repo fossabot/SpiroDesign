@@ -37,6 +37,7 @@ public class SpiroView extends View {
 
 	public boolean isMove = false;
 
+	public int lineSize;
 
 	public SpiroView(SpiroModel aModel, SpiroController aController) {
 		super(aModel, aController);
@@ -45,6 +46,7 @@ public class SpiroView extends View {
 		this.scontroller = aController;
 		this.scontroller.setModel(this.smodel);
 		this.scontroller.setView(this);
+		this.lineSize = 10;
 		return;
 	}
 
@@ -104,15 +106,22 @@ public class SpiroView extends View {
 				pickerMenuItem.addActionListener(action);
 				rainbowMenuItem.addActionListener(action);
 				popup.add(colorMenu);
-				// サイズを指定する
-				JMenuItem sizeMenuItem = new JMenuItem("size");
-				sizeMenuItem.addActionListener(action);
-				popup.add(sizeMenuItem);
+				// 線を太くする
+				JMenuItem thickMenuItem = new JMenuItem("thick");
+				thickMenuItem.addActionListener(action);
+				popup.add(thickMenuItem);
+				// 線を細くする
+				JMenuItem thinMenuItem = new JMenuItem("thin");
+				thinMenuItem.addActionListener(action);
+				popup.add(thinMenuItem);
 			}
 			// 速さを指定する
-			JMenuItem speedMenuItem = new JMenuItem("speed");
-			speedMenuItem.addActionListener(action);
-			popup.add(speedMenuItem);
+			JMenuItem speedupMenuItem = new JMenuItem("speed up");
+			speedupMenuItem.addActionListener(action);
+			popup.add(speedupMenuItem);
+			JMenuItem speeddownMenuItem = new JMenuItem("speed down");
+			speeddownMenuItem.addActionListener(action);
+			popup.add(speeddownMenuItem);
 			
 
 			popup.show(MenuMouseEvent.getComponent(),MenuMouseEvent.getX(),MenuMouseEvent.getY());

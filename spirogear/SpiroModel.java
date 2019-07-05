@@ -20,7 +20,7 @@ public class SpiroModel extends Model implements Runnable {
 
 	private boolean isInscribe;
 
-	private boolean isRainbow;
+	public boolean isRainbow;
 
 	private DesignLocus designLocus;
 
@@ -34,14 +34,19 @@ public class SpiroModel extends Model implements Runnable {
 
 	private SpiroIO spiroIO;
 
-	private Color circleColor;
+	private Color spiroColor;
 
+	private Thread thread;
 
 	public SpiroModel() {
 		super();
-		this.initialize();
-		return;
-	}
+		this.isAnimated = false;
+		this.tickTime = 500;
+		this.thread = new Thread();
+		this.isRainbow = false;
+		this.spiroColor = Color.black;
+		// this.spiroGear = new SpiroGear();
+}
 
 	public void SpiroModel(Cons aList) {
 
@@ -147,7 +152,24 @@ public class SpiroModel extends Model implements Runnable {
 
 	public void run() {
 
-	}
+		this.isAnimated = true;
+
+		while(isAnimated){
+				try
+				{
+						Thread.sleep(tickTime);
+						if(isRainbow = true){
+							spiroRainbow();
+						}
+				}
+				catch (InterruptedException anException)
+				{
+						System.err.println(anException);
+						throw new RuntimeException(anException.toString());
+				}
+				super.changed();
+		}
+}
 
 	public void spiroClear() {
 
@@ -161,8 +183,10 @@ public class SpiroModel extends Model implements Runnable {
 		Color color = JColorChooser.showDialog(aView, "color picker", Color.white);
 
 		if(color != null){
-			circleColor = color;
-    }
+			isRainbow = false;
+			spiroColor = color;
+		}
+		return;
 	}
 
 	public void spiroDive(View aView) {
@@ -185,8 +209,9 @@ public class SpiroModel extends Model implements Runnable {
 
 	}
 
-	public void spiroRainbow(View aView) {
-
+	public void spiroRainbow() {
+		spiroColor = new Color(spiroColor.getRed()+1, spiroColor.getGreen()+1, spiroColor.getBlue()+1);
+		return;
 	}
 
 	public void spiroSave(View aView) {
@@ -194,22 +219,23 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	public void spiroSpeedDown() {
+		tickTime += 100;
+		return;
 
 	}
 
 	public void spiroSpeedUp() {
-
+		if(tickTime > 100) tickTime -= 100;
+		return;
 	}
 
 	public void spiroStart() {
-		System.out.println("start");
-		return;
-	}
+		thread.start();
+}
 
-	public void spiroStop() {
-		System.out.println("stop");
-		return;
-	}
+public void spiroStop() {
+		this.isAnimated = false;
+}
 
 	public void spurCenter(Point aPoint) {
 

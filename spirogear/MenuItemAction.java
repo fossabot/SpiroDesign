@@ -40,13 +40,23 @@ public class MenuItemAction implements ActionListener {
       }
       else if(text.equals("rainbow")) {
         this.sview.showPopupMenu();
-        this.smodel.spiroRainbow(sview);
+        this.smodel.isRainbow = true;
       }
-      else if(text.equals("size")) {
+      else if(text.equals("thick")) {
         this.sview.showPopupMenu();
+        if(this.sview.lineSize <= 100) this.sview.lineSize += 10;
       }
-      else if(text.equals("speed")) {
+      else if(text.equals("thin")) {
         this.sview.showPopupMenu();
+        if(this.sview.lineSize >= 10) this.sview.lineSize -= 10;
+      }
+      else if(text.equals("speed up")) {
+        this.sview.showPopupMenu();
+        this.smodel.spiroSpeedUp();
+      }
+      else if(text.equals("speed down")) {
+        this.sview.showPopupMenu();
+        this.smodel.spiroSpeedDown();
       }
     }
   }
