@@ -4,9 +4,13 @@ import MVC.mvc.View;
 // import javafx.beans.binding.BooleanBinding;
 import Cons.cons.Cons;
 import java.awt.Point;
+import java.awt.Color;
 import Cons.cons.Symbol;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import javax.swing.JColorChooser;
+import javax.swing.JComponent;
+
 
 public class SpiroModel extends Model implements Runnable {
 
@@ -29,6 +33,8 @@ public class SpiroModel extends Model implements Runnable {
 	private ArrayList<DesignLocus> designLoci;
 
 	private SpiroIO spiroIO;
+
+	private Color circleColor;
 
 
 	public SpiroModel() {
@@ -152,7 +158,11 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	public void spiroColor(View aView) {
+		Color color = JColorChooser.showDialog(aView, "color picker", Color.white);
 
+		if(color != null){
+			circleColor = color;
+    }
 	}
 
 	public void spiroDive(View aView) {

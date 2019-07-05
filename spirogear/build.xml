@@ -4,7 +4,7 @@
 
 	<property name="package" value="mvc" />
 	<property name="packagenames" value="${package}" />
-	<property name="destdir" value="./spirogear/Classes" />
+	<property name="destdir" value="./Classes" />
 	<property name="docdir" value="./JavaDoc" />
 	<property name="instdir" value="./${ant.project.name}.app/Contents/Resources/Java" />
 	<property name="copyright" value="Copyright 2008-2016 AOKI Atsushi. All Rights Reserved." />

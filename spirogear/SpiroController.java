@@ -11,8 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import javax.swing.event.MouseInputAdapter;
-import javax.swing.JPopupMenu;
-import javax.swing.JMenuItem;
 
 public class SpiroController extends Controller implements ActionListener {
 
@@ -53,6 +51,8 @@ public class SpiroController extends Controller implements ActionListener {
 	 * @param aMouseEvent
 	 */
 	public void mouseClicked(MouseEvent aMouseEvent) {
+
+		// 右クリックが行われた際、その座標を獲得してその位置にメニューを表示するようViewに依頼する。
 		if (aMouseEvent.getButton() == MouseEvent.BUTTON3){
 			this.sview.isMenuPopuping = true;
 			this.sview.MenuMouseEvent = aMouseEvent;

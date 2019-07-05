@@ -33,9 +33,14 @@ public class MenuItemAction implements ActionListener {
         this.sview.isMove = false;
         this.smodel.spiroStop();
       }
-      else if(text.equals("color")) {
+      else if(text.equals("picker")) {
+        System.out.println("ok");
         this.sview.showPopupMenu();
         this.smodel.spiroColor(sview);
+      }
+      else if(text.equals("rainbow")) {
+        this.sview.showPopupMenu();
+        this.smodel.spiroRainbow(sview);
       }
       else if(text.equals("size")) {
         this.sview.showPopupMenu();

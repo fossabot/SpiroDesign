@@ -6,7 +6,7 @@ import MVC.mvc.Controller;
 import MVC.mvc.View;
 import java.awt.event.MouseEvent;
 import javax.swing.JPopupMenu;
-import javax.swing.JComponent;
+import javax.swing.JMenu;
 
 // import com.sun.xml.internal.ws.api.Component;
 
@@ -31,8 +31,6 @@ public class SpiroView extends View {
 
 	protected SpiroModel smodel;
 
-	protected Point MenuPoint;
-
 	public MouseEvent MenuMouseEvent;
 
 	public boolean isMenuPopuping = false;
@@ -47,7 +45,6 @@ public class SpiroView extends View {
 		this.scontroller = aController;
 		this.scontroller.setModel(this.smodel);
 		this.scontroller.setView(this);
-
 		return;
 	}
 
@@ -98,13 +95,21 @@ public class SpiroView extends View {
 				JMenuItem startMenuItem = new JMenuItem("start");
 				startMenuItem.addActionListener(action);
 				popup.add(startMenuItem);
-				JMenuItem colorMenuItem = new JMenuItem("color");
-				colorMenuItem.addActionListener(action);
-				popup.add(colorMenuItem);
+				// 色を指定するメニュー
+				JMenu colorMenu = new JMenu("color");
+				JMenuItem pickerMenuItem = new JMenuItem("picker");
+				JMenuItem rainbowMenuItem = new JMenuItem("rainbow");
+				colorMenu.add(pickerMenuItem);
+				colorMenu.add(rainbowMenuItem);
+				pickerMenuItem.addActionListener(action);
+				rainbowMenuItem.addActionListener(action);
+				popup.add(colorMenu);
+				// サイズを指定する
 				JMenuItem sizeMenuItem = new JMenuItem("size");
 				sizeMenuItem.addActionListener(action);
 				popup.add(sizeMenuItem);
 			}
+			// 速さを指定する
 			JMenuItem speedMenuItem = new JMenuItem("speed");
 			speedMenuItem.addActionListener(action);
 			popup.add(speedMenuItem);
