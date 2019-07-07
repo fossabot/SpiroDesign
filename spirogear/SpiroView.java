@@ -1,13 +1,20 @@
-import java.util.ArrayList;
-import java.lang.Math;
-import java.awt.Color;
+import java.awt.Point;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 import spirogear.MVC.mvc.Model;
 import spirogear.MVC.mvc.Controller;
 import spirogear.MVC.mvc.View;
+import java.awt.event.MouseEvent;
+import javax.swing.JPopupMenu;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import java.awt.geom.Point2D;
+import java.lang.Math;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class SpiroView extends View {
 	double rotation_radian = 0;
 	BufferedImage buffimg;
@@ -15,12 +22,43 @@ public class SpiroView extends View {
 	double distanse_PentoPiniongearcenter; //penとpiniongearの中心の距離
 	double radian_PentoPiniongearcenter; //penとpiniongearの中心の角度
 
+	protected Model model;
+
+	/**
+	 * 制御を司るControllerのインスタンスを束縛する。
+	 */
+	protected Controller controller;
+
+	/**
+	 * スクロール量としてPointのインスタンスを束縛する。
+	 */
+	private Point offset;
+
+	protected SpiroController scontroller;
+
+	protected SpiroModel smodel;
+
+	public MouseEvent MenuMouseEvent;
+
+	public boolean isMenuPopuping = false;
+
+	public boolean isMove = false;
+
+	public int lineSize;
+
 	public SpiroView(SpiroModel aModel, SpiroController aController) {
 		super(aModel, aController);
+		this.smodel = aModel;
+		this.smodel.addDependent(this);
+		this.scontroller = aController;
+		this.scontroller.setModel(this.smodel);
+		this.scontroller.setView(this);
+		this.lineSize = 5;
 		buffimg = new BufferedImage(800,600,BufferedImage.TYPE_INT_RGB);
 		bfg = buffimg.createGraphics();
 		bfg.setColor(new Color(255, 255, 255));
 		bfg.fillRect(0, 0, 800, 600);
+		return;
 	}
 
 	public void displayPinionGear(Graphics aGraphics, int aX, int aY) {
@@ -44,60 +82,110 @@ public class SpiroView extends View {
 	}
 
 	public void displaySpurGear(Graphics aGraphics, int aX, int aY) {
-
+		double spurRadius = this.smodel.spurSendRadius();
+		aGraphics.drawOval(aX, aY, (int)(spurRadius*2.0), (int)(spurRadius*2.0));
 	}
 
 	public void paintComponent(Graphics aGraphics) {
-<<<<<<< HEAD
-		Integer width;
-		Integer height;
-		Integer x = 300;
-		Integer y = 150;
-		Integer spur_r = 121; //spurgearの半径
-		Integer pinion_r = 42; //piniongearの半径
-		Integer pen_x = 515;
-		Integer pen_y = 304;
-
-		width = this.getWidth();
-		height = this.getHeight();
+		Integer width = this.getWidth();
+		Integer height = this.getHeight();
+		Point2D.Double spurCenter = this.smodel.spurSendCenter();
+		double spurRadius = this.smodel.spurSendRadius();
+		Point2D.Double pinionCenter = this.smodel.pinionSendCenter();
+		double pinionRadius = this.smodel.pinionSendRadius();
+		Point2D.Double penPosition = this.smodel.sendpenPosition();
 		aGraphics.setColor(Color.white);
 		aGraphics.fillRect(0, 0, width, height);
 		aGraphics.setColor(Color.black);
 
+		//ペンの軌跡を描画
 		aGraphics.drawImage(buffimg, 0, 0, this);
 		//spurGearの描画
-		aGraphics.drawOval(x, y, 2*spur_r, 2*spur_r);
+		aGraphics.drawOval((int)spurCenter.x, (int)spurCenter.y, (int)(spurRadius*2.0), (int)(spurRadius*2.0));
 		//pinionGearの描画
-		aGraphics.drawOval(x + spur_r - pinion_r + (int)((spur_r - pinion_r) * Math.cos(rotation_radian * Math.PI / 180)), y + spur_r - pinion_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180)), 2*pinion_r, 2*pinion_r);
+		aGraphics.drawOval((int)(spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180.0)), (int)(spurCenter.y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((rotation_radian + 180.0) * Math.PI / 180.0)), (int)(2.0*pinionRadius), (int)(2*pinionRadius));
 
 		if (rotation_radian == 0) {
-			distanse_PentoPiniongearcenter = Math.sqrt(Math.pow(pen_x - (x + spur_r + (int)((spur_r - pinion_r) * Math.cos(rotation_radian * Math.PI / 180))), 2) + Math.pow(pen_y - (y + spur_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180))), 2));
-			//distanse_PentoPiniongearcenter = 50;
-			//radian_PentoPiniongearcenter = Math.atan2((x + spur_r - pinion_r + (int)((spur_r - pinion_r) * Math.cos(rotation_radian * Math.PI / 180)) + pen_x) - (x + spur_r - pinion_r + (int)((spur_r - pinion_r) * Math.cos((rotation_radian + 180) * Math.PI / 180)) + pinion_r), (y + spur_r - pinion_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180)) + pen_y) - (y + spur_r - pinion_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180)) + pinion_r));
-			radian_PentoPiniongearcenter = Math.atan2(pen_y - (y + spur_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180))), pen_x - (x + spur_r + (int)((spur_r - pinion_r) * Math.cos(rotation_radian * Math.PI / 180))));
-			System.out.println(radian_PentoPiniongearcenter);
+			distanse_PentoPiniongearcenter = Math.sqrt(Math.pow(penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180))), 2) + Math.pow(penPosition.y - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180))), 2));
+			radian_PentoPiniongearcenter = 0 - Math.atan2(penPosition.x - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180))), penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180))));
 		} else {
-			radian_PentoPiniongearcenter += 1 * Math.PI / 180;
+			radian_PentoPiniongearcenter += 1 * Math.PI / 180;;
 		}
 
-    //penの描画
-		aGraphics.setColor(Color.red);
-		aGraphics.fillRect(x + spur_r + (int)((spur_r - pinion_r) * Math.cos(rotation_radian * Math.PI / 180) + distanse_PentoPiniongearcenter * Math.cos((spur_r - pinion_r) * (radian_PentoPiniongearcenter) / pinion_r)), y + spur_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180) - distanse_PentoPiniongearcenter * Math.sin((spur_r - pinion_r) * (radian_PentoPiniongearcenter) / pinion_r)), 5, 5);
+		//penの描画
+		aGraphics.setColor(this.smodel.spiroColor);
+		aGraphics.fillRect((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180) + distanse_PentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180) - distanse_PentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius)), this.lineSize, this.lineSize);
 
 		//spurgearの左端
-		aGraphics.fillRect(x - 5, y + spur_r - 5, 10, 10);
+		aGraphics.fillRect((int)(spurCenter.x - 5), (int)(spurCenter.y + spurRadius - 5), 10, 10);
 
-		bfg.setColor(Color.black);
-		bfg.fillOval(x + spur_r + (int)((spur_r - pinion_r) * Math.cos(rotation_radian * Math.PI / 180) + distanse_PentoPiniongearcenter * Math.cos((spur_r - pinion_r) * (radian_PentoPiniongearcenter) / pinion_r)), y + spur_r + (int)((spur_r - pinion_r) * Math.sin((rotation_radian + 180) * Math.PI / 180) - distanse_PentoPiniongearcenter * Math.sin((spur_r - pinion_r) * (radian_PentoPiniongearcenter) / pinion_r)), 3, 3);
+		//のちに変更
+		//aGraphics.fillRect((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radian_PentoPiniongearcenter * Math.PI / 180.0) + distanse_PentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radian_PentoPiniongearcenter * Math.PI / 180.0) - distanse_PentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), 5, 5);
+
+		//ペンの軌跡を追加
+		bfg.setColor(this.smodel.spiroColor);
+		bfg.fillOval((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180) + distanse_PentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180) - distanse_PentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius)), this.lineSize, this.lineSize);
 
 		rotation_radian -= 1;
-=======
-		int aX=this.getWidth();
-		int aY=this.getHeight();
-		int spurRadius=200;
-		aGraphics.drawOval(aX/2-spurRadius/2, aY/2-spurRadius/2, spurRadius, spurRadius);
->>>>>>> 511f3e45910631b94569e9b7966eae3bffdc628d
 	}
+
+	public void showPopupMenu()
+	{
+		if(isMenuPopuping){
+			JPopupMenu popup = new JPopupMenu();
+			MenuItemAction action = new MenuItemAction(this, smodel);
+
+			if(isMove){
+				JMenuItem stopMenuItem = new JMenuItem("stop");
+				stopMenuItem.addActionListener(action);
+				popup.add(stopMenuItem);
+
+			}
+			else {
+				JMenuItem startMenuItem = new JMenuItem("start");
+				startMenuItem.addActionListener(action);
+				popup.add(startMenuItem);
+				JMenuItem clearMenuItem = new JMenuItem("clear");
+				clearMenuItem.addActionListener(action);
+				popup.add(clearMenuItem);
+				popup.addSeparator();
+				// 色を指定するメニュー
+				JMenu colorMenu = new JMenu("color");
+				JMenuItem pickerMenuItem = new JMenuItem("picker");
+				JMenuItem rainbowMenuItem = new JMenuItem("rainbow");
+				colorMenu.add(pickerMenuItem);
+				colorMenu.add(rainbowMenuItem);
+				pickerMenuItem.addActionListener(action);
+				rainbowMenuItem.addActionListener(action);
+				popup.add(colorMenu);
+				popup.addSeparator();
+				// 線を太くする
+				JMenuItem thickMenuItem = new JMenuItem("thick");
+				thickMenuItem.addActionListener(action);
+				popup.add(thickMenuItem);
+				// 線を細くする
+				JMenuItem thinMenuItem = new JMenuItem("thin");
+				thinMenuItem.addActionListener(action);
+				popup.add(thinMenuItem);
+			}
+			popup.addSeparator();
+			// 速さを指定する
+			JMenuItem speedupMenuItem = new JMenuItem("speed up");
+			speedupMenuItem.addActionListener(action);
+			popup.add(speedupMenuItem);
+			JMenuItem speeddownMenuItem = new JMenuItem("speed down");
+			speeddownMenuItem.addActionListener(action);
+			popup.add(speeddownMenuItem);
+
+
+			popup.show(MenuMouseEvent.getComponent(),MenuMouseEvent.getX(),MenuMouseEvent.getY());
+		}
+		return;
+	}
+
+
+
+
 
 	public String toString() {
 		return null;

@@ -27,12 +27,12 @@ public class Controller extends MouseInputAdapter implements MouseWheelListener
 	/**
 	 * 以前にマウスのボタンが押下された場所をPointのインスタンスとして束縛する。
 	 */
-	protected Point previous;
+	private Point previous;
 
 	/**
 	 * 現在にマウスのボタンが押下された場所をPointのインスタンスとして束縛する。
 	 */
-	protected Point current;
+	private Point current;
 
 	/**
 	 * インスタンスを生成して応答する。

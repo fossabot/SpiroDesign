@@ -67,7 +67,7 @@ public class Example extends Object
 			height = aDimension.height + titleBarHeight;
 			Dimension windowSize = new Dimension(width, height);
 			aWindow.setSize(windowSize.width, windowSize.height);
-			
+
 
 			// ウィンドウに各種の設定を行って出現させる。
 			aWindow.setMinimumSize(new Dimension(400, 300 + titleBarHeight));

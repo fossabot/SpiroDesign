@@ -53,7 +53,7 @@
 		<delete dir="${instdir}" />
 		<delete file="../${zipname}.zip" />
 		<delete>
-			<fileset dir="${package}" includes="./spirogear/*.class" />
+			<fileset dir="${package}" includes="*.class" />
 		</delete>
 		<exec executable="date" spawn="false" />
 	</target>

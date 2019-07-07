@@ -68,19 +68,6 @@ public class Example extends Object {
 			aWindow.toFront();
 		//}
 
-		for(Integer i = 0; i <= 360000; i++) {
-			try
-			{
-				Thread.sleep(10);
-			}
-			catch (InterruptedException anException)
-			{
-				System.err.println(anException);
-				throw new RuntimeException(anException.toString());
-			}
-			aModel.changed();
-		}
-
 		return;
 	}
 
