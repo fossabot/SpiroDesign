@@ -11,8 +11,9 @@ public class SpurGear extends SpiroGear {
 
 	public SpurGear() {
 		super();
-		Point2D.Double firstPoint = new Point2D.Double(400,240);
-		this.center(firstPoint,100.0);
+		// Point2D.Double firstPoint = new Point2D.Double(400,240);
+		this.center(400.0,240.0);
+		this.radius(100.0);
 	}
 
 	// public SpurGear(Cons aList) {

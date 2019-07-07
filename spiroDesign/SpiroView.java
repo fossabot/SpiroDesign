@@ -35,7 +35,7 @@ public class SpiroView extends View {
 	/**
 	 * 回転半径
 	 */
-	private double rotationRadian = 0;
+	public double rotationRadian = 0;
 
 	/**
 	 * バッファーイメージ
@@ -225,7 +225,7 @@ public class SpiroView extends View {
 		bfg.setColor(color);
 		bfg.fillOval((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radianPentoPiniongearcenter * Math.PI / 180.0) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radianPentoPiniongearcenter * Math.PI / 180.0) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), this.lineSize, this.lineSize);
 
-		// 回転半径を一度ずつ変更する？
+		// ピニオンギアの回転角度
 		rotationRadian -= 1;
 	}
 

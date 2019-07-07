@@ -43,13 +43,22 @@ public class SpiroGear extends Object {
 		return null;
 	}
 
+	/**
+	 * なんのセンター
+	 * スパーギアのセンター
+	 * @return
+	 */
 	public Point2D.Double center() {
 		return this.center;
 	}
 
-	public void center(Point2D.Double x, Double y) {
-		this.center = x;
-		this.radius = y;
+	/**
+	 * スパーギアのセンター
+	 * @param x
+	 * @param y
+	 */
+	public void center(double x, double y) {
+		this.center.setLocation(x,y);
 	}
 
 	public Rectangle centerRectangle() {
@@ -72,10 +81,18 @@ public class SpiroGear extends Object {
 		return null;
 	}
 
+	/**
+	 * 半径を返す
+	 * @return
+	 */
 	public Double radius() {
 		return this.radius;
 	}
 
+	/**
+	 * 半径を決める
+	 * @param r
+	 */
 	public void radius(Double r) {
 		this.radius = this.radius+r;
 		if(this.radius<50){

@@ -22,15 +22,17 @@ public class PinionGear extends SpiroGear {
 
 	public PinionGear() {
 		super();
-		Point2D.Double firstPoint = new Point2D.Double(700,150);
-		this.center(firstPoint,25.0);
+		// Point2D.Double firstPoint = new Point2D.Double(700,150);
+		this.center(700.0,150.0);
+		this.radius(25.0);
+		this.degrees = 0;
 	}
 
 	// public PinionGear(Cons aList) {
 	//
 	// }
 
-	
+
 	public PinionGear(Double p, Double r, Double uv) {
 
 	}
@@ -48,7 +50,8 @@ public class PinionGear extends SpiroGear {
 	}
 
 	public Double degrees() {
-		return null;
+		degrees -= 1;
+		return degrees;
 	}
 
 	// public Hashtable<Symbol,Object> fromList(Cons aList) {

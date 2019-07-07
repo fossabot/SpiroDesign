@@ -88,13 +88,20 @@ public class SpiroModel extends Model implements Runnable {
 		this.spiroGear = new SpiroGear();
 		this.spurGear = new SpurGear();
 		this.pinionGear = new PinionGear();
+		this.initialize();
+	}
+
+	/**
+	 * 変数の初期化
+	 */
+	public void initialize(){
 		this.isAnimated = false;
 		this.tickTime = 500;
 		this.thread = new Thread(this);
 		this.isRainbow = false;
 		this.spiroColor = new Color(0,0,0);
-		// this.spiroGear = new SpiroGear();
-}
+		return;
+	}
 
 		/**
 	 * 指定されたビューを依存物に設定する。
@@ -234,7 +241,7 @@ public class SpiroModel extends Model implements Runnable {
 	 * @return
 	 */
 	public Double pinionDegrees(double spurDegrees) {
-		return null;
+		return this.pinionGear.degrees();
 	}
 
 	/**
@@ -482,10 +489,16 @@ public void spiroStop() {
 	}
 
 	/**
-	 * ピニオンギアの中心を送る
+	 * ピニオンギアの中心座標を送る
 	 * @return
 	 */
 	public Point2D.Double pinionSendCenter() {
+		double spurRadius = this.spurSendRadius();
+		double pinionRadius = this.pinionSendRadius();
+		Point2D.Double spurCenter = this.spurSendCenter();
+		double x = spurCenter.getX() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(this.pinionDegrees * Math.PI / 180.0);
+		double y = spurCenter.getY() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((this.pinionDegrees + 180.0) * Math.PI / 180.0);
+		this.pinionGear.center(x,y);
 		Point2D.Double center = this.pinionGear.center();
 		return center;
 	}
