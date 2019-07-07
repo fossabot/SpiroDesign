@@ -15,32 +15,74 @@ import java.awt.geom.Point2D;
 
 public class SpiroModel extends Model implements Runnable {
 
+	/**
+	 * 
+	 */
 	private SpurGear spurGear;
 
+	/**
+	 * 
+	 */
 	private PinionGear pinionGear;
 
+	/**
+	 * 
+	 */
 	private boolean isInscribe;
 
+	/**
+	 * 
+	 */
 	public boolean isRainbow;
 
+	/**
+	 * 
+	 */
 	private DesignLocus designLocus;
 
+	/**
+	 * 
+	 */
 	private boolean isAnimated;
 
+	/**
+	 * 
+	 */
 	private int tickTime;
 
+	/**
+	 * 
+	 */
 	private Double pinionDegrees;
 
+	/**
+	 * 
+	 */
 	private ArrayList<DesignLocus> designLoci;
 
+	/**
+	 * 
+	 */
 	private SpiroIO spiroIO;
 
+	/**
+	 * 
+	 */
 	private SpiroGear spiroGear;
 
+	/**
+	 * 
+	 */
 	public Color spiroColor;
 
+	/**
+	 * 
+	 */
 	private Thread thread;
 
+	/**
+	 * 
+	 */
 	public SpiroModel() {
 		super();
 		this.spiroGear = new SpiroGear();
@@ -64,82 +106,165 @@ public class SpiroModel extends Model implements Runnable {
 		return;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public DesignLocus designLocus() {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<DesignLocus> designLoci() {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public PinionGear firstPinionGear() {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public void flush() {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isAnimated() {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isCircumscribe() {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isEditable() {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isInscribe() {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isRainbow() {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isStopped() {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public PinionGear lastPinionGear() {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public SpiroModel open() {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param aModel
+	 * @return
+	 */
 	public SpiroModel open(SpiroModel aModel) {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public void perform() {
 
 	}
 
+	/**
+	 * 
+	 * @param aPoint
+	 */
 	public void pinionCenter(Point aPoint) {
 
 	}
 
+
+	/**
+	 * 
+	 * @param spurDegrees
+	 * @return
+	 */
 	public Double pinionDegrees(double spurDegrees) {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public PinionGear pinionGear() {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param aPoint
+	 */
 	public void pinionPen(Point aPoint) {
 
 	}
 
+	/**
+	 * 
+	 * @param aPoint
+	 */
 	public void pinionRadius(Point aPoint) {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public void run() {
 
 		this.isAnimated = true;
@@ -164,14 +289,26 @@ public class SpiroModel extends Model implements Runnable {
 		return;
 }
 
+	/**
+	 * 
+	 * @return
+	 */
 	public void spiroClear() {
-
+		return;
 	}
 
+	/**
+	 * 
+	 * @param aView
+	 */
 	public void spiroCircumscribe(View aView) {
 
 	}
 
+	/**
+	 * 
+	 * @param aView
+	 */
 	public void spiroColor(View aView) {
 		Color color = JColorChooser.showDialog(aView, "color picker", Color.white);
 
@@ -182,26 +319,10 @@ public class SpiroModel extends Model implements Runnable {
 		return;
 	}
 
-	public void spiroDive(View aView) {
-
-	}
-
-	public void spiroInscribe(View aView) {
-
-	}
-
-	public SpiroModel spiroNew() {
-		return null;
-	}
-
-	public void spiroNib(View aView) {
-
-	}
-
-	public void spiroOpen(View aView) {
-
-	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public void spiroRainbow() {
 		int r = spiroColor.getRed();
 		int g = spiroColor.getGreen();
@@ -216,32 +337,97 @@ public class SpiroModel extends Model implements Runnable {
 		return;
 	}
 
+	/**
+	 * 
+	 * @param aView
+	 */
+	public void spiroDive(View aView) {
+
+	}
+
+	/**
+	 * 
+	 * @param aView
+	 */
+	public void spiroInscribe(View aView) {
+
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public SpiroModel spiroNew() {
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param aView
+	 */
+	public void spiroNib(View aView) {
+
+	}
+
+	/**
+	 * 
+	 * @param aView
+	 */
+	public void spiroOpen(View aView) {
+
+	}
+
+	/**
+	 * 
+	 * @param aView
+	 */
 	public void spiroSave(View aView) {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public void spiroSpeedDown() {
 		tickTime += 10;
 		return;
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public void spiroSpeedUp() {
 		if(tickTime > 10) tickTime -= 10;
 		return;
 	}
 
+
+	/**
+	 * 回転スタート
+	 * @return
+	 */
 	public void spiroStart() {
 		thread.start();
 		return;
 }
 
+/**
+ * 回転ストップ
+ * @return
+ */
 public void spiroStop() {
 		this.isAnimated = false;
 		this.thread = new Thread(this);
 		return;
 }
 
+/**
+ * スパーギアの中心
+ * @param aPoint
+ */
 	public void spurCenter(Point aPoint) {
 		Double x = Double.valueOf(aPoint.x);
 		Double y = Double.valueOf(aPoint.y);
@@ -250,57 +436,107 @@ public void spiroStop() {
 		return;
 	}
 
+	/**
+	 * スパーギアの角度？
+	 * @param pinionDegrees
+	 * @return
+	 */
 	public Double spurDegrees(double pinionDegrees) {
 		return null;
 	}
 
+	/**
+	 * スパーギア
+	 * @return
+	 */
 	public SpurGear spurGear() {
 		return null;
 	}
 
+	/**
+	 * スパーギアの半径
+	 * @param aPoint
+	 */
 	public void spurRadius(Point aPoint) {
 		double x = (double)aPoint.x;
 		this.spurGear.radius(x);
 		return;
 	}
 
+	/**
+	 * スパーギアの中心を送る
+	 * @return
+	 */
 	public Point2D.Double spurSendCenter() {
 		Point2D.Double center = this.spurGear.center();
 		return center;
 	}
 
+	/**
+	 * スパーギアの半径を送る
+	 * @return
+	 */
 	public Double spurSendRadius() {
 		Double radius = this.spurGear.radius();
 		return radius;
 	}
 
+	/**
+	 * ピニオンギアの中心を送る
+	 * @return
+	 */
 	public Point2D.Double pinionSendCenter() {
 		Point2D.Double center = this.pinionGear.center();
 		return center;
 	}
 
+	/**
+	 * ピニオンギアの半径を送る
+	 * @return
+	 */
 	public Double pinionSendRadius() {
 		Double radius = this.pinionGear.radius();
 		return radius;
 	}
 
+	/**
+	 * ペンの位置を送る
+	 * @return
+	 */
 	public Point2D.Double sendpenPosition(){
 		Point2D.Double penPosition = this.pinionGear.penPosition();
 		return penPosition;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String toString() {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public void underConstruction() {
-
+		return;
 	}
 
+	/**
+	 * 
+	 * @param aView
+	 */
 	public void underConstruction(View aView) {
 
 	}
 
+	/**
+	 * 
+	 * @param aView
+	 * @param aString
+	 */
 	public void warn(View aView, String aString) {
 
 	}

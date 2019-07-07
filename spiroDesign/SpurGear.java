@@ -19,6 +19,11 @@ public class SpurGear extends SpiroGear {
 	//
 	// }
 
+	/**
+	 * 
+	 * @param p
+	 * @param r
+	 */
 	public SpurGear(Double p, Double r) {
 
 	}

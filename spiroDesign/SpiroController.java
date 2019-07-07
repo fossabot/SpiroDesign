@@ -82,17 +82,17 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	public void mouseDragged(MouseEvent aMouseEvent) {
-		Cursor aCursor = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
-		Component aComponent = (Component)aMouseEvent.getSource();
-		aComponent.setCursor(aCursor);
-		this.spirocurrent = aMouseEvent.getPoint();
-		this.whichPickingArea(this.spirocurrent);
-		Integer x = this.spirocurrent.x - this.spiroprevious.x;
-		Integer y = this.spirocurrent.y - this.spiroprevious.y;
-		Point aPoint = new Point(x, y);
-		this.smodel.spurCenter(aPoint);
-		this.scrollBy(aPoint, aMouseEvent);
-		this.spiroprevious = this.spirocurrent;
+		// Cursor aCursor = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
+		// Component aComponent = (Component)aMouseEvent.getSource();
+		// aComponent.setCursor(aCursor);
+		// this.spirocurrent = aMouseEvent.getPoint();
+		// this.whichPickingArea(this.spirocurrent);
+		// Integer x = this.spirocurrent.x - this.spiroprevious.x;
+		// Integer y = this.spirocurrent.y - this.spiroprevious.y;
+		// Point aPoint = new Point(x, y);
+		// this.smodel.spurCenter(aPoint);
+		// this.scrollBy(aPoint, aMouseEvent);
+		// this.spiroprevious = this.spirocurrent;
 		return;
 	}
 

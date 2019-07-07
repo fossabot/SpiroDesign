@@ -30,6 +30,7 @@ public class PinionGear extends SpiroGear {
 	//
 	// }
 
+	
 	public PinionGear(Double p, Double r, Double uv) {
 
 	}
