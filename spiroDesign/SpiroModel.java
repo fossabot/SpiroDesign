@@ -51,9 +51,14 @@ public class SpiroModel extends Model implements Runnable {
 	private int tickTime;
 
 	/**
-	 * 
+	 * ピニオンギアの角度
 	 */
 	private Double pinionDegrees;
+
+	/**
+	 * スパーギアの角度
+	 */
+	private Double spurDegrees;
 
 	/**
 	 * 
@@ -100,6 +105,7 @@ public class SpiroModel extends Model implements Runnable {
 		this.thread = new Thread(this);
 		this.isRainbow = false;
 		this.spiroColor = new Color(0,0,0);
+		this.spurDegrees = 0;
 		return;
 	}
 
@@ -241,7 +247,8 @@ public class SpiroModel extends Model implements Runnable {
 	 * @return
 	 */
 	public Double pinionDegrees(double spurDegrees) {
-		return this.pinionGear.degrees();
+		pinionDegrees = this.pinionGear.degrees();
+		return pinionDegrees;
 	}
 
 	/**
@@ -448,8 +455,9 @@ public void spiroStop() {
 	 * @param pinionDegrees
 	 * @return
 	 */
-	public Double spurDegrees(double pinionDegrees) {
-		return null;
+	public Double spurDegrees() {
+		if(isAnimated) spurDegrees += 1;
+		return spurDegrees;
 	}
 
 	/**
@@ -496,8 +504,8 @@ public void spiroStop() {
 		double spurRadius = this.spurSendRadius();
 		double pinionRadius = this.pinionSendRadius();
 		Point2D.Double spurCenter = this.spurSendCenter();
-		double x = spurCenter.getX() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(this.pinionDegrees * Math.PI / 180.0);
-		double y = spurCenter.getY() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((this.pinionDegrees + 180.0) * Math.PI / 180.0);
+		double x = spurCenter.getX() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(this.spurDegrees * Math.PI / 180.0);
+		double y = spurCenter.getY() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((this.spurDegrees + 180.0) * Math.PI / 180.0);
 		this.pinionGear.center(x,y);
 		Point2D.Double center = this.pinionGear.center();
 		return center;
