@@ -108,7 +108,7 @@ public class SpiroView extends View {
 		aGraphics.drawOval(aX, aY, (int)(spurRadius*2.0), (int)(spurRadius*2.0));
 		//spurGearの描画位置
 		aGraphics.setColor(this.smodel.spiroColor);
-		aGraphics.fillRect((int)(aX - 5), (int)((aY + spurRadius) - 5), 10, 10);
+		aGraphics.fillRect(aX - 5, (int)(aY + spurRadius - 5), 10, 10);
 		//追加＿spurGearの中心の描画
 		aGraphics.setColor(this.smodel.spiroColor);
 		aGraphics.fillRect((int)((aX + spurRadius) - 5), (int)((aY + spurRadius) - 5), 10, 10);
@@ -137,7 +137,7 @@ public class SpiroView extends View {
 	public void displayPinionPen(Graphics aGraphics, int aX, int aY) {
 		aGraphics.fillRect(aX,aY,this.smodel.pinionGear().penNib(),this.smodel.pinionGear().penNib());
 	}
-	
+
 	/**
 	 * デザインの軌跡たちの表示？
 	 * @param aGraphics グラフィックス・コンテキスト
@@ -189,31 +189,29 @@ public class SpiroView extends View {
 		// バッファーイメージを表示
 		aGraphics.drawImage(this.buffimg, 0, 0, this);
 		//spurGearの描画
-		double sx = (double)spurCenter.x;
-		double sy = (double)spurCenter.y;
-		this.displaySpurGear(aGraphics, (int)sx, (int)sy);
+		this.displaySpurGear(aGraphics, (int)spurCenter.x, (int)spurCenter.y);
 		//aGraphics.drawOval((int)spurCenter.x, (int)spurCenter.y, (int)(spurRadius*2.0), (int)(spurRadius*2.0));
 		//pinionGearの描画
-		double px = spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180.0);
-		double py = spurCenter.y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((rotation_radian + 180.0) * Math.PI / 180.0);
+		double px = spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(rotationRadian * Math.PI / 180.0);
+		double py = spurCenter.y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((rotationRadian + 180.0) * Math.PI / 180.0);
 		this.displayPinionGear(aGraphics, (int)px, (int)py);
 		//aGraphics.drawOval((int)x, (int)y, (int)(2.0*pinionRadius), (int)(2*pinionRadius));
 		this.smodel.pinionCenter(px,py);
 
 		// ピニオンギアとの距離と角度を計算
-		if (rotation_radian == 0) {
-			distanse_PentoPiniongearcenter = Math.sqrt(Math.pow(penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180))), 2) + Math.pow(penPosition.y - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180))), 2));
-			radian_PentoPiniongearcenter = 0 - Math.atan2(penPosition.y - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180))), 0 - (penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180)))));
+		if (rotationRadian == 0) {
+			distansePentoPiniongearcenter = Math.sqrt(Math.pow(penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotationRadian * Math.PI / 180))), 2) + Math.pow(penPosition.y - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotationRadian + 180) * Math.PI / 180))), 2));
+			radianPentoPiniongearcenter = 0 - Math.atan2(penPosition.y - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotationRadian + 180) * Math.PI / 180))), 0 - (penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotationRadian * Math.PI / 180)))));
 			// System.out.println(radian_PentoPiniongearcenter);
 			// System.out.println(radian_PentoPiniongearcenter * 180 / Math.PI);
 		} else {
-			radian_PentoPiniongearcenter += 1 * Math.PI / 180;
+			radianPentoPiniongearcenter += 1 * Math.PI / 180;
 		}
 
 		//penの描画
 		aGraphics.setColor(this.smodel.pinionGear().penColor());
-		double penx = spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180) + distanse_PentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius);
-		double peny = spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180) - distanse_PentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius);
+		double penx = spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(rotationRadian * Math.PI / 180) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter) / pinionRadius);
+		double peny = spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin((rotationRadian + 180) * Math.PI / 180) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter) / pinionRadius);
 		this.displayPinionPen(aGraphics, (int)penx, (int)peny);
 		this.smodel.pinionPen(penx,peny);
 
@@ -229,7 +227,7 @@ public class SpiroView extends View {
 	/**
 	 * メニューにそれぞれの項目を設置し表示する。
 	 */
-	public void showPopupMenu() 
+	public void showPopupMenu()
 	{
 			JPopupMenu popup = new JPopupMenu();
 			MenuItemAction action = new MenuItemAction(this, smodel);
@@ -275,7 +273,7 @@ public class SpiroView extends View {
 			JMenuItem speeddownMenuItem = new JMenuItem("speed down");
 			speeddownMenuItem.addActionListener(action);
 			popup.add(speeddownMenuItem);
-			
+
 			popup.show(MenuMouseEvent.getComponent(),MenuMouseEvent.getX(),MenuMouseEvent.getY());
 		return;
 	}
