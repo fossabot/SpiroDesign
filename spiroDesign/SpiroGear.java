@@ -1,4 +1,3 @@
-<<<<<<< HEAD:spiroDesign/SpiroGear.java
 package spiroDesign;
 
 import MVC.mvc.Model;
@@ -6,11 +5,6 @@ import MVC.mvc.Controller;
 import MVC.mvc.View;
 import Cons.cons.Cons;
 import Cons.cons.Symbol;
-=======
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/SpiroGear.java
 import java.awt.Rectangle;
 import java.util.Hashtable;
 import java.awt.Point;
@@ -24,11 +18,8 @@ public class SpiroGear extends Object {
 
 	public SpiroGear() {
 		//System.out.println("test");
-<<<<<<< HEAD:spiroDesign/SpiroGear.java
 		this.center = new Point2D.Double(400.0, 240.0);
 		this.radius = 0.0;
-=======
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/SpiroGear.java
 	}
 
 	public SpiroGear(Double x, Double y) {
@@ -54,19 +45,15 @@ public class SpiroGear extends Object {
 		return null;
 	}
 
-<<<<<<< HEAD:spiroDesign/SpiroGear.java
 	/**
 	 * なんのセンター
 	 * スパーギアのセンター
 	 * @return
 	 */
-=======
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/SpiroGear.java
 	public Point2D.Double center() {
 		return this.center;
 	}
 
-<<<<<<< HEAD:spiroDesign/SpiroGear.java
 	/**
 	 * スパーギアのセンター
 	 * @param x
@@ -75,11 +62,6 @@ public class SpiroGear extends Object {
 	public void center(double x, double y) {
 		this.center = new Point2D.Double(x,y);
 		return;
-=======
-	public void center(Point2D.Double x, Double y) {
-		this.center = x;
-		this.radius = y;
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/SpiroGear.java
 	}
 
 	public Rectangle centerRectangle() {
@@ -120,10 +102,7 @@ public class SpiroGear extends Object {
 			this.radius=50.0;
 		}
 		System.out.println(radius);
-<<<<<<< HEAD:spiroDesign/SpiroGear.java
 		return;
-=======
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/SpiroGear.java
 	}
 
 	public Double right() {
