@@ -1,10 +1,7 @@
-<<<<<<< HEAD:spiroDesign/DesignLocus.java
 package spiroDesign;
 
 import Cons.cons.Cons;
 import Cons.cons.Symbol;
-=======
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/DesignLocus.java
 import java.util.Vector;
 import java.util.Hashtable;
 

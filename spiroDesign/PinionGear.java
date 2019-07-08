@@ -1,4 +1,3 @@
-<<<<<<< HEAD:spiroDesign/PinionGear.java
 package spiroDesign;
 
 import MVC.mvc.Model;
@@ -7,12 +6,6 @@ import MVC.mvc.View;
 import Cons.cons.Cons;
 import java.awt.Color;
 import Cons.cons.Symbol;
-=======
-import spirogear.MVC.mvc.Model;
-import spirogear.MVC.mvc.Controller;
-import spirogear.MVC.mvc.View;
-import java.awt.Color;
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/PinionGear.java
 import java.awt.Rectangle;
 import java.util.Hashtable;
 import java.awt.geom.Point2D;
@@ -29,25 +22,15 @@ public class PinionGear extends SpiroGear {
 
 	public PinionGear() {
 		super();
-<<<<<<< HEAD:spiroDesign/PinionGear.java
 		// Point2D.Double firstPoint = new Point2D.Double(700,150);
 		this.center(425.0,240.0);
 		this.radius(25.0);
 		this.degrees = 0.0;
-=======
-		Point2D.Double firstPoint = new Point2D.Double(700,150);
-		this.penPosition = new Point2D.Double(590, 340);
-		this.center(firstPoint,25.0);
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/PinionGear.java
 	}
 
 	// public PinionGear(Cons aList) {
 	//
 	// }
-<<<<<<< HEAD:spiroDesign/PinionGear.java
-
-=======
->>>>>>> fb0df58abbc56e609afbd7b9363cccd9d39489ed:spirogear/PinionGear.java
 
 	public PinionGear(Double p, Double r, Double uv) {
 
