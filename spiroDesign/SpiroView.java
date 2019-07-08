@@ -103,8 +103,15 @@ public class SpiroView extends View {
 	 * @param aY　スパーギアのy座標
 	 */
 	public void displaySpurGear(Graphics aGraphics, int aX, int aY) {
-		double spurRadius = this.smodel.spurSendRadius(); // スパーギアの半径
-		aGraphics.drawOval((int)(aX-spurRadius), (int)(aY-spurRadius), (int)(spurRadius*2.0), (int)(spurRadius*2.0));
+		double spurRadius = this.smodel.spurGetRadius();
+		aGraphics.setColor(Color.black);
+		aGraphics.drawOval(aX, aY, (int)(spurRadius*2.0), (int)(spurRadius*2.0));
+		//spurGearの描画位置
+		aGraphics.setColor(this.smodel.spiroColor);
+		aGraphics.fillRect((int)(aX - 5), (int)((aY + spurRadius) - 5), 10, 10);
+		//追加＿spurGearの中心の描画
+		aGraphics.setColor(this.smodel.spiroColor);
+		aGraphics.fillRect((int)((aX + spurRadius) - 5), (int)((aY + spurRadius) - 5), 10, 10);
 		return;
 	}
 
@@ -115,13 +122,10 @@ public class SpiroView extends View {
 	 * @param aY ピニオンギアのy座標
 	 */
 	public void displayPinionGear(Graphics aGraphics, int aX, int aY) {
-		double pinionRadius = this.smodel.pinionSendRadius(); // ピニオンギアの半径
-		// int pinionX = (int)(spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(this.rotationRadian * Math.PI / 180.0));
-		// int pinionY = (int)(spurCenter.y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((this.rotationRadian + 180.0) * Math.PI / 180.0));
-		// int pinionWidth = (int)(2.0*pinionRadius);
-		// int pinionHeight = (int)(2.0*pinionRadius);
-		aGraphics.drawOval((int)(aX-pinionRadius),(int)(aY-pinionRadius), (int)(2.0*pinionRadius), (int)(2.0*pinionRadius));
-		return;
+		double pinionRadius = this.smodel.pinionGetRadius();
+		aGraphics.setColor(Color.black);
+		aGraphics.drawOval(aX, aY, (int)(2.0*pinionRadius), (int)(2*pinionRadius));
+	return;
 	}
 
 /**
@@ -131,7 +135,7 @@ public class SpiroView extends View {
  * @param aY
  */
 	public void displayPinionPen(Graphics aGraphics, int aX, int aY) {
-
+		aGraphics.fillRect(aX,aY,this.smodel.pinionGear().penNib(),this.smodel.pinionGear().penNib());
 	}
 	
 	/**
@@ -174,42 +178,52 @@ public class SpiroView extends View {
 		// ウィンドウの大きさを取得しておく
 		Integer width = this.getWidth();
 		Integer height = this.getHeight();
-		Point2D.Double spurCenter = this.smodel.spurSendCenter();	// スパーギアの中心
-		double spurRadius = this.smodel.spurSendRadius(); // スパーギアの半径
-		Point2D.Double pinionCenter = this.smodel.pinionSendCenter(); // ピニオンギアの中心
-		double pinionRadius = this.smodel.pinionSendRadius(); // ピニオンギアの半径
-		Point2D.Double penPosition = this.smodel.pinionSendCenter(); // ペンの位置
+		Point2D.Double spurCenter = this.smodel.spurGetCenter();	// スパーギアの中心
+		double spurRadius = this.smodel.spurGetRadius(); // スパーギアの半径
+		Point2D.Double pinionCenter = this.smodel.pinionGetCenter(); // ピニオンギアの中心
+		double pinionRadius = this.smodel.pinionGetRadius(); // ピニオンギアの半径
+		Point2D.Double penPosition = this.smodel.pinionGetCenter(); // ペンの位置
 		aGraphics.setColor(Color.white); // 背景色を設定
 		aGraphics.fillRect(0, 0, width, height); // 背景を塗る
-		aGraphics.setColor(Color.black); // 黒色で描画
-		// バッファーした画像を表示
+
+		// バッファーイメージを表示
 		aGraphics.drawImage(this.buffimg, 0, 0, this);
 		//spurGearの描画
-		this.displaySpurGear(aGraphics, (int)spurCenter.x, (int)spurCenter.y);
+		double sx = (double)spurCenter.x;
+		double sy = (double)spurCenter.y;
+		this.displaySpurGear(aGraphics, (int)sx, (int)sy);
+		//aGraphics.drawOval((int)spurCenter.x, (int)spurCenter.y, (int)(spurRadius*2.0), (int)(spurRadius*2.0));
 		//pinionGearの描画
-		this.displayPinionGear(aGraphics, (int)pinionCenter.x, (int)pinionCenter.y);
-		// aGraphics.drawOval((int)(spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(rotationRadian * Math.PI / 180.0)), (int)(spurCenter.y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((rotationRadian + 180.0) * Math.PI / 180.0)), (int)(2.0*pinionRadius), (int)(2*pinionRadius));
+		double px = spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180.0);
+		double py = spurCenter.y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((rotation_radian + 180.0) * Math.PI / 180.0);
+		this.displayPinionGear(aGraphics, (int)px, (int)py);
+		//aGraphics.drawOval((int)x, (int)y, (int)(2.0*pinionRadius), (int)(2*pinionRadius));
+		this.smodel.pinionCenter(px,py);
 
 		// ピニオンギアとの距離と角度を計算
-		if (rotationRadian == 0) {
-			distansePentoPiniongearcenter = Math.sqrt(Math.pow(penPosition.x - pinionRadius, 2.0) + Math.pow(penPosition.y - pinionRadius, 2.0));
-			radianPentoPiniongearcenter = Math.atan2((spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(rotationRadian * Math.PI / 180.0) + penPosition.x) - (spurCenter.x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos((rotationRadian + 180.0) * Math.PI / 180.0)) + pinionRadius, (spurCenter.y + spurRadius - pinionRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotationRadian + 180.0) * Math.PI / 180.0)) + penPosition.x) - (spurCenter.y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((rotationRadian + 180.0) * Math.PI / 180.0)) + pinionRadius);
+		if (rotation_radian == 0) {
+			distanse_PentoPiniongearcenter = Math.sqrt(Math.pow(penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180))), 2) + Math.pow(penPosition.y - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180))), 2));
+			radian_PentoPiniongearcenter = 0 - Math.atan2(penPosition.y - (spurCenter.y + spurRadius + (int)((spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180))), 0 - (penPosition.x - (spurCenter.x + spurRadius + (int)((spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180)))));
+			// System.out.println(radian_PentoPiniongearcenter);
+			// System.out.println(radian_PentoPiniongearcenter * 180 / Math.PI);
 		} else {
-			radianPentoPiniongearcenter += 1;
+			radian_PentoPiniongearcenter += 1 * Math.PI / 180;
 		}
 
-		//拡大するときの四角
-		Color color = this.smodel.pinionGear().penColor();
-		aGraphics.setColor(color);
-		aGraphics.fillRect((int)spurCenter.x - 5, (int)(spurCenter.y + spurRadius) - 5, 10, 10);
+		//penの描画
+		aGraphics.setColor(this.smodel.pinionGear().penColor());
+		double penx = spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(rotation_radian * Math.PI / 180) + distanse_PentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius);
+		double peny = spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin((rotation_radian + 180) * Math.PI / 180) - distanse_PentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radian_PentoPiniongearcenter) / pinionRadius);
+		this.displayPinionPen(aGraphics, (int)penx, (int)peny);
+		this.smodel.pinionPen(penx,peny);
 
-		// TODO: 式が間違っているため変更する
-		aGraphics.fillRect((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radianPentoPiniongearcenter * Math.PI / 180.0) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radianPentoPiniongearcenter * Math.PI / 180.0) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
-		bfg.setColor(color);
-		bfg.fillOval((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radianPentoPiniongearcenter * Math.PI / 180.0) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radianPentoPiniongearcenter * Math.PI / 180.0) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
+		//spurGearの描画位置
+		aGraphics.setColor(this.smodel.pinionGear().penColor());
+		aGraphics.fillRect((int)spurCenter.x - 5, (int)(spurCenter.y + spurRadius) - 5, this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
 
-		// ピニオンギアの回転角度
-		rotationRadian -= 1;
+		//追加＿spurGearの中心の描画
+		aGraphics.setColor(this.smodel.pinionGear().penColor());
+		aGraphics.fillRect((int)(spurCenter.x + spurRadius) - 5, (int)(spurCenter.y + spurRadius) - 5, this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
 	}
 
 	/**

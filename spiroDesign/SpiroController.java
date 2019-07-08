@@ -89,7 +89,7 @@ public class SpiroController extends Controller implements ActionListener {
 		Integer x = this.spirocurrent.x - this.spiroprevious.x;
 		Integer y = this.spirocurrent.y - this.spiroprevious.y;
 		Point aPoint = new Point(x, y);
-		this.smodel.spurCenter(aPoint);
+		// this.smodel.spurCenter(aPoint);
 		this.scrollBy(aPoint, aMouseEvent);
 		this.spiroprevious = this.spirocurrent;
 		return;
@@ -151,16 +151,22 @@ public class SpiroController extends Controller implements ActionListener {
 		return aBuffer.toString();	}
 
 	private void whichPickingArea(Point aPoint) {
-		Point2D.Double spurCenter = this.smodel.spurSendCenter();
-		Double spurRadius = this.smodel.spurSendRadius();
+		Point2D.Double spurCenter = this.smodel.spurGetCenter();
+		Double spurRadius = this.smodel.spurGetRadius();
+		Point2D.Double pinionCenter = this.smodel.pinionGetCenter();
+		Double pinionRadius = this.smodel.pinionGetRadius();
 		Integer x = this.spirocurrent.x - this.spiroprevious.x;
 		Integer y = this.spirocurrent.y - this.spiroprevious.y;
 		Point movePoint = new Point(x,y);
-		if((spurCenter.x-spurRadius+5>=aPoint.x)&&(spurCenter.x-spurRadius-5<=aPoint.x)&&(spurCenter.y+5>=aPoint.y)&&(spurCenter.y-5<=aPoint.y)){
-			this.smodel.spurRadius(movePoint);
-		}else if((spurCenter.x+5>=aPoint.x)&&(spurCenter.x-5<=aPoint.x)&&(spurCenter.y+5>=aPoint.y)&&(spurCenter.y-5<=aPoint.y)){
-
+		System.out.println(pinionCenter.x);
+		if((spurCenter.x+5>=aPoint.x)&&(spurCenter.x-5<=aPoint.x)&&(spurCenter.y+spurRadius+5>=aPoint.y)&&(spurCenter.y+spurRadius-5<=aPoint.y)){
+			this.smodel.spurCenter(movePoint);
+		}else if((spurCenter.x+spurRadius+5>=aPoint.x)&&(spurCenter.x+spurRadius-5<=aPoint.x)&&(spurCenter.y+spurRadius+5>=aPoint.y)&&(spurCenter.y+spurRadius-5<=aPoint.y)){
+			this.smodel.spurPosition(movePoint);
+		}else if((pinionCenter.x+pinionRadius+5>=aPoint.x)&&(pinionCenter.x+pinionRadius-5<=aPoint.x)&&(pinionCenter.y+pinionRadius*2.0+5>=aPoint.y)&&(pinionCenter.y+pinionRadius*2.0-5<=aPoint.y)){
+			this.smodel.pinionFirstCenter(movePoint);
 		}
+		return;
 	}
 
 }

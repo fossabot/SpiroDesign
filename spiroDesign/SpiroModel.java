@@ -234,13 +234,29 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * ピニオンギアの中心を計算？
+	 * 
 	 * @param aPoint
 	 */
-	public void pinionCenter(Point aPoint) {
-
+	public void pinionFirstCenter(Point aPoint) {
+		Double x = Double.valueOf(aPoint.x);
+		Double y = Double.valueOf(aPoint.y);
+		this.pinionGear.center(x*2.0,x*2.0);
+		this.pinionRadius(aPoint);
+		this.pinionFirstPen(x,y);
+		return;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	public void pinionCenter(double x, double y) {
+		Double px = Double.valueOf(x);
+		Double py = Double.valueOf(y);
+		this.pinionGear.center2(x,y);
+		return;
+	}
 
 	/**
 	 * スパーギアとピニオンギアの中心を結んだ線の角度
@@ -261,20 +277,36 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * ペンの位置を計算？
-	 * @param aPoint
+	 * 
+	 * @param x
+	 * @param y
 	 */
-	public void pinionPen(Point aPoint) {
-
+	public void pinionFirstPen(Double x, Double y) {
+		Point2D.Double pen = this.pinionGetCenter();
+		this.pinionGear.penPosition(pen.x+x, pen.y+y);
+		return;
 	}
 
 	/**
 	 * 
-	 * ピニオンギアの半径
+	 * @param x
+	 * @param y
+	 */
+	public void pinionPen(double x, double y) {
+		Double penx = Double.valueOf(x);
+		Double peny = Double.valueOf(y);
+		this.pinionGear.penPosition(penx, peny);
+		return;
+	}
+
+	/**
+	 * 
 	 * @param aPoint
 	 */
 	public void pinionRadius(Point aPoint) {
-
+		double x = (double)aPoint.x;
+		this.pinionGear.radius(x);
+		return;
 	}
 
 	/**
@@ -450,14 +482,25 @@ public void spiroStop() {
 	public void spurCenter(Point aPoint) {
 		Double x = Double.valueOf(aPoint.x);
 		Double y = Double.valueOf(aPoint.y);
-		this.spiroGear.center(x,y);
+		this.spurGear.center(x,y);
 		this.spurRadius(aPoint);
 		return;
 	}
 
 	/**
+	 * スパーギアの中心を計算する
+	 * 半径は変えない
+	 * @param aPoint
+	 */
+	public void spurPosition(Point aPoint) {
+		Double x = Double.valueOf(aPoint.x);
+		Double y = Double.valueOf(aPoint.y);
+		this.spurGear.center(x,y);
+		return;
+	}
+
+	/**
 	 * スパーギアの角度？
-	 * @param pinionDegrees
 	 * @return
 	 */
 	public Double spurDegrees() {
@@ -484,52 +527,46 @@ public void spiroStop() {
 	}
 
 	/**
-	 * スパーギアの中心を送る
+	 * スパーギアの中心を取得する
 	 * @return
 	 */
-	public Point2D.Double spurSendCenter() {
+	public Point2D.Double spurGetCenter() {
 		Point2D.Double center = this.spurGear.center();
 		return center;
 	}
 
 	/**
-	 * スパーギアの半径を送る
+	 * スパーギアの半径を取得する
 	 * @return
 	 */
-	public Double spurSendRadius() {
+	public Double spurGetRadius() {
 		Double radius = this.spurGear.radius();
 		return radius;
 	}
 
 	/**
-	 * ピニオンギアの中心座標を送る
+	 * ピニオンギアの中心座標を取得する
 	 * @return
 	 */
-	public Point2D.Double pinionSendCenter() {
-		double spurRadius = this.spurSendRadius();
-		double pinionRadius = this.pinionSendRadius();
-		Point2D.Double spurCenter = this.spurSendCenter();
-		double x = spurCenter.getX() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(this.spurDegrees * Math.PI / 180.0);
-		double y = spurCenter.getY() + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((this.spurDegrees + 180.0) * Math.PI / 180.0);
-		this.pinionGear.center(x,y);
+	public Point2D.Double pinionGetCenter() {
 		Point2D.Double center = this.pinionGear.center();
 		return center;
 	}
 
 	/**
-	 * ピニオンギアの半径を送る
+	 * ピニオンギアの半径を取得
 	 * @return
 	 */
-	public Double pinionSendRadius() {
+	public Double pinionGetRadius() {
 		Double radius = this.pinionGear.radius();
 		return radius;
 	}
 
 	/**
-	 * ペンの位置を送る
+	 * ペンの位置を取得
 	 * @return
 	 */
-	public Point2D.Double sendpenPosition(){
+	public Point2D.Double penGetPosition(){
 		Point2D.Double penPosition = this.pinionGear.penPosition();
 		return penPosition;
 	}

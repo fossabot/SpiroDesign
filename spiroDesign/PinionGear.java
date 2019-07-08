@@ -22,9 +22,9 @@ public class PinionGear extends SpiroGear {
 
 	public PinionGear() {
 		super();
-		// Point2D.Double firstPoint = new Point2D.Double(700,150);
-		this.center(425.0,240.0);
-		this.radius(25.0);
+		Point2D.Double pinionFirstPoint = new Point2D.Double(700,150);
+		this.initialize(pinionFirstPoint,25.0);
+		this.penPosition = new Point2D.Double(590,340);
 		this.degrees = 0.0;
 		this.penColor = new Color(0,0,0);
 		this.penNib = 10;
@@ -86,7 +86,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	public void penPosition(Double x, Double y) {
-
+		this.penPosition = new Point2D.Double(x,y);
 	}
 
 	public Rectangle penRectangle() {
