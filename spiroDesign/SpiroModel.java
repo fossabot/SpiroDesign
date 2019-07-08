@@ -105,7 +105,7 @@ public class SpiroModel extends Model implements Runnable {
 		this.thread = new Thread(this);
 		this.isRainbow = false;
 		this.spiroColor = new Color(0,0,0);
-		this.spurDegrees = 0;
+		this.spurDegrees = 0.0;
 		return;
 	}
 
@@ -445,7 +445,7 @@ public void spiroStop() {
 	public void spurCenter(Point aPoint) {
 		Double x = Double.valueOf(aPoint.x);
 		Double y = Double.valueOf(aPoint.y);
-		//this.spiroGear.center(x,y);
+		this.spiroGear.center(x,y);
 		this.spurRadius(aPoint);
 		return;
 	}
@@ -456,7 +456,7 @@ public void spiroStop() {
 	 * @return
 	 */
 	public Double spurDegrees() {
-		if(isAnimated) spurDegrees += 1;
+		if(isAnimated) spurDegrees -= 1;
 		return spurDegrees;
 	}
 

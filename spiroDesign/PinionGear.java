@@ -23,9 +23,9 @@ public class PinionGear extends SpiroGear {
 	public PinionGear() {
 		super();
 		// Point2D.Double firstPoint = new Point2D.Double(700,150);
-		this.center(550.0,100.0);
+		this.center(425.0,240.0);
 		this.radius(25.0);
-		this.degrees = 0;
+		this.degrees = 0.0;
 	}
 
 	// public PinionGear(Cons aList) {
