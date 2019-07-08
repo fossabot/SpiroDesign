@@ -70,30 +70,6 @@ public class Example extends Object {
 			aWindow.toFront();
 		//}
 
-
-		 //モデルのピクチャを、奇数の時はnullに、偶数の時はスクリーン全体のキャプチャ画像にする。
-		 for (Integer index = 0; index < (howMany * 4 - 1); index++)
-		 {
-		 	try
-		 	{
-		 		Thread.sleep(1000);
-		 	}
-		 	catch (InterruptedException anException)
-		 	{
-		 		System.err.println(anException);
-		 		throw new RuntimeException(anException.toString());
-		 	}
-		 	if (index % 2 == 0)
-		 	{
-		 		aModel.picture(anImage);
-		 	}
-		 	else
-		 	{
-		 		aModel.picture(null);
-		 	}
-		 	aModel.changed();
-		 }
-
 		return;
 	}
 
