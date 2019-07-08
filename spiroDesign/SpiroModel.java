@@ -16,12 +16,12 @@ import java.awt.geom.Point2D;
 public class SpiroModel extends Model implements Runnable {
 
 	/**
-	 * 
+	 * SpurGearを束縛する
 	 */
 	private SpurGear spurGear;
 
 	/**
-	 * 
+	 * PinionGearを束縛する
 	 */
 	private PinionGear pinionGear;
 
@@ -31,7 +31,7 @@ public class SpiroModel extends Model implements Runnable {
 	private boolean isInscribe;
 
 	/**
-	 * 
+	 * レインボーかどうか
 	 */
 	public boolean isRainbow;
 
@@ -41,12 +41,12 @@ public class SpiroModel extends Model implements Runnable {
 	private DesignLocus designLocus;
 
 	/**
-	 * 
+	 * 動いているか
 	 */
 	private boolean isAnimated;
 
 	/**
-	 * 
+	 * 描画間隔を制御する
 	 */
 	private int tickTime;
 
@@ -76,17 +76,17 @@ public class SpiroModel extends Model implements Runnable {
 	private SpiroGear spiroGear;
 
 	/**
-	 * 
+	 * 線の色
 	 */
 	public Color spiroColor;
 
 	/**
-	 * 
+	 * スレッド
 	 */
 	private Thread thread;
 
 	/**
-	 * 
+	 * 初期化
 	 */
 	public SpiroModel() {
 		super();
@@ -104,6 +104,7 @@ public class SpiroModel extends Model implements Runnable {
 		this.tickTime = 500;
 		this.thread = new Thread(this);
 		this.isRainbow = false;
+		this.isAnimated = false;
 		this.spiroColor = new Color(0,0,0);
 		this.spurDegrees = 0.0;
 		return;
@@ -156,7 +157,7 @@ public class SpiroModel extends Model implements Runnable {
 	 * @return
 	 */
 	public boolean isAnimated() {
-		return false;
+		return this.isAnimated;
 	}
 
 	/**
@@ -188,7 +189,7 @@ public class SpiroModel extends Model implements Runnable {
 	 * @return
 	 */
 	public boolean isRainbow() {
-		return false;
+		return this.isRainbow;
 	}
 
 	/**
@@ -233,7 +234,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 * ピニオンギアの中心を計算？
 	 * @param aPoint
 	 */
 	public void pinionCenter(Point aPoint) {
@@ -242,7 +243,7 @@ public class SpiroModel extends Model implements Runnable {
 
 
 	/**
-	 * 
+	 * スパーギアとピニオンギアの中心を結んだ線の角度
 	 * @param spurDegrees
 	 * @return
 	 */
@@ -252,15 +253,15 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 * ピニオンギアを返す
 	 * @return
 	 */
 	public PinionGear pinionGear() {
-		return null;
+		return this.pinionGear;
 	}
 
 	/**
-	 * 
+	 * ペンの位置を計算？
 	 * @param aPoint
 	 */
 	public void pinionPen(Point aPoint) {
@@ -269,6 +270,7 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * 
+	 * ピニオンギアの半径
 	 * @param aPoint
 	 */
 	public void pinionRadius(Point aPoint) {
@@ -276,7 +278,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 * スレッドで用いる
 	 * @return
 	 */
 	public void run() {
@@ -304,10 +306,11 @@ public class SpiroModel extends Model implements Runnable {
 }
 
 	/**
-	 * 
+	 * 初期化
 	 * @return
 	 */
 	public void spiroClear() {
+		this.initialize();
 		return;
 	}
 
@@ -320,7 +323,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 * ペンの色を変更
 	 * @param aView
 	 */
 	public void spiroColor(View aView) {
@@ -328,25 +331,26 @@ public class SpiroModel extends Model implements Runnable {
 
 		if(color != null){
 			isRainbow = false;
-			spiroColor = color;
+			this.pinionGear.penColor(color);
 		}
 		return;
 	}
 
 	/**
-	 * 
+	 * ペンの色をレインボーに
 	 * @return
 	 */
 	public void spiroRainbow() {
-		int r = spiroColor.getRed();
-		int g = spiroColor.getGreen();
-		int b = spiroColor.getBlue();
-		if(r == 255 && g >= 0 && g < 255 && b == 0){ spiroColor = new Color(r, g+1, b); }
-		else if(r > 0 && r <= 255 && g == 255 && b == 0){ spiroColor = new Color(r-1, g, b); }
-		else if(r == 0 && g == 255 && b >= 0 && b < 255){ spiroColor = new Color(r, g, b+1); }
-		else if(r == 0 && g <= 255 && g > 0 && b == 255){ spiroColor = new Color(r, g-1, b); }
-		else if(r >= 0 && r < 255 && g == 0 && b == 255){ spiroColor = new Color(r+1, g, b); }
-		else if(r == 255 && g == 0 && b <= 255 && b > 0){ spiroColor = new Color(r, g, b-1); }
+		this.isRainbow = true;
+		int r = this.pinionGear.penColor().getRed();
+		int b = this.pinionGear.penColor().getGreen();
+		int g = this.pinionGear.penColor().getBlue();
+		if(r == 255 && g >= 0 && g < 255 && b == 0){ this.pinionGear.penColor(new Color(r, g+1, b)); }
+		else if(r > 0 && r <= 255 && g == 255 && b == 0){ this.pinionGear.penColor(new Color(r-1, g, b)); }
+		else if(r == 0 && g == 255 && b >= 0 && b < 255){ this.pinionGear.penColor(new Color(r, g, b+1)); }
+		else if(r == 0 && g <= 255 && g > 0 && b == 255){ this.pinionGear.penColor(new Color(r, g-1, b)); }
+		else if(r >= 0 && r < 255 && g == 0 && b == 255){ this.pinionGear.penColor(new Color(r+1, g, b)); }
+		else if(r == 255 && g == 0 && b <= 255 && b > 0){ this.pinionGear.penColor(new Color(r, g, b-1)); }
 
 		return;
 	}
@@ -376,7 +380,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 * ペンの太さ？
 	 * @param aView
 	 */
 	public void spiroNib(View aView) {
@@ -400,21 +404,21 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 * スピードを下げる
 	 * @return
 	 */
 	public void spiroSpeedDown() {
-		tickTime += 10;
+		this.tickTime += 10;
 		return;
 
 	}
 
 	/**
-	 * 
+	 * スピードをあげる
 	 * @return
 	 */
 	public void spiroSpeedUp() {
-		if(tickTime > 10) tickTime -= 10;
+		if(this.tickTime > 10) this.tickTime -= 10;
 		return;
 	}
 
@@ -424,6 +428,7 @@ public class SpiroModel extends Model implements Runnable {
 	 * @return
 	 */
 	public void spiroStart() {
+		this.isAnimated = true;
 		thread.start();
 		return;
 }
@@ -465,7 +470,7 @@ public void spiroStop() {
 	 * @return
 	 */
 	public SpurGear spurGear() {
-		return null;
+		return spurGear;
 	}
 
 	/**

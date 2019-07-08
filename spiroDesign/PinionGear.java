@@ -26,6 +26,8 @@ public class PinionGear extends SpiroGear {
 		this.center(425.0,240.0);
 		this.radius(25.0);
 		this.degrees = 0.0;
+		this.penColor = new Color(0,0,0);
+		this.penNib = 10;
 	}
 
 	// public PinionGear(Cons aList) {
@@ -62,19 +64,21 @@ public class PinionGear extends SpiroGear {
 	}
 
 	public Color penColor() {
-		return null;
+		return this.penColor;
 	}
 
 	public void penColor(Color aColor) {
-
+		this.penColor = aColor;
+		return;
 	}
 
 	public int penNib() {
-		return 0;
+		return this.penNib;
 	}
 
 	public void penNib(int anlnteger) {
-
+		this.penNib += anlnteger;
+		return;
 	}
 
 	public Point2D.Double penPosition() {

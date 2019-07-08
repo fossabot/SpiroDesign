@@ -74,7 +74,6 @@ public class SpiroController extends Controller implements ActionListener {
       
 		// 右クリックが行われた際、その座標を獲得してその位置にメニューを表示するようViewに依頼する。
 		if (btn == MouseEvent.BUTTON3){
-			this.sview.isMenuPopuping = true;
 			this.sview.MenuMouseEvent = aMouseEvent;
 			this.sview.showPopupMenu();
 			return;	

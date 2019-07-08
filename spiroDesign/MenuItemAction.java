@@ -21,20 +21,19 @@ public class MenuItemAction implements ActionListener {
 
   // メニューがクリックされた際のアクション
   public void actionPerformed(ActionEvent anActionEvent) {
-    if(this.sview.isMenuPopuping = true){
       // どのメニューがクリックされたかを調べる
       JMenuItem item = (JMenuItem) anActionEvent.getSource();
       // メニュー文字列を取得
       String text = item.getText();
 
-      if(text.equals("start")){
-        this.sview.isMove = true;
-        this.smodel.spiroStart();
-        
-      }
-      else if(text.equals("stop")) {
-        this.sview.isMove = false;
+      if(text.equals("stop")) {
         this.smodel.spiroStop();
+      }
+      else if(text.equals("start")){
+        this.smodel.spiroStart();      
+      }
+      else if(text.equals("clear")){
+        this.smodel.spiroClear(); 
       }
       else if(text.equals("picker")) {
         this.sview.showPopupMenu();
@@ -47,11 +46,11 @@ public class MenuItemAction implements ActionListener {
       }
       else if(text.equals("thick")) {
         this.sview.showPopupMenu();
-        if(this.sview.lineSize <= 100) this.sview.lineSize += 10;
+        if(this.smodel.pinionGear().penNib() <= 100) this.smodel.pinionGear().penNib(10);
       }
       else if(text.equals("thin")) {
         this.sview.showPopupMenu();
-        if(this.sview.lineSize >= 10) this.sview.lineSize -= 10;
+        if(this.smodel.pinionGear().penNib() >= 10) this.smodel.pinionGear().penNib(-10);
       }
       else if(text.equals("speed up")) {
         this.sview.showPopupMenu();
@@ -61,6 +60,5 @@ public class MenuItemAction implements ActionListener {
         this.sview.showPopupMenu();
         this.smodel.spiroSpeedDown();
       }
-    }
   }
 }

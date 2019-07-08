@@ -67,22 +67,6 @@ public class SpiroView extends View {
 	 */
 	public MouseEvent MenuMouseEvent;
 
-
-	/** 
-	 * メニューが押されたことを記録する。
-	 */
-	public boolean isMenuPopuping = false;
-
-	/**
-	 * ペンが動いているかを伝える。
-	 */
-	public boolean isMove = false;
-
-	/**
-	 * ペンの太さ。
-	 */
-	public int lineSize;
-
 	/**
 	 * インスタンスを生成して応答する。
 	 * 指定されたモデルの依存物となり、モデルとコントローラとビューを設定する。
@@ -97,7 +81,6 @@ public class SpiroView extends View {
 		this.scontroller = aController;
 		this.scontroller.setModel(this.smodel);
 		this.scontroller.setView(this);
-		this.lineSize = 10;
 		this.initialize();
 		return;
 	}
@@ -106,11 +89,11 @@ public class SpiroView extends View {
 	 * 各変数を初期化する。
 	 */
 	public void initialize() {
-		this.lineSize = 10;
 		buffimg = new BufferedImage(800,600,BufferedImage.TYPE_INT_RGB);
 		bfg = buffimg.createGraphics();
 		bfg.setColor(Color.WHITE);
 		bfg.fillRect(0, 0, 800, 600);
+		return;
 	}
 
 	/**
@@ -216,14 +199,14 @@ public class SpiroView extends View {
 		}
 
 		//拡大するときの四角
-		Color color = this.smodel.spiroColor;
+		Color color = this.smodel.pinionGear().penColor();
 		aGraphics.setColor(color);
 		aGraphics.fillRect((int)spurCenter.x - 5, (int)(spurCenter.y + spurRadius) - 5, 10, 10);
 
 		// TODO: 式が間違っているため変更する
-		aGraphics.fillRect((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radianPentoPiniongearcenter * Math.PI / 180.0) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radianPentoPiniongearcenter * Math.PI / 180.0) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), this.lineSize, this.lineSize);
+		aGraphics.fillRect((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radianPentoPiniongearcenter * Math.PI / 180.0) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radianPentoPiniongearcenter * Math.PI / 180.0) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
 		bfg.setColor(color);
-		bfg.fillOval((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radianPentoPiniongearcenter * Math.PI / 180.0) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radianPentoPiniongearcenter * Math.PI / 180.0) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), this.lineSize, this.lineSize);
+		bfg.fillOval((int)(spurCenter.x + spurRadius + (spurRadius - pinionRadius) * Math.cos(radianPentoPiniongearcenter * Math.PI / 180.0) + distansePentoPiniongearcenter * Math.cos((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), (int)(spurCenter.y + spurRadius + (spurRadius - pinionRadius) * Math.sin(radianPentoPiniongearcenter * Math.PI / 180.0) - distansePentoPiniongearcenter * Math.sin((spurRadius - pinionRadius) * (radianPentoPiniongearcenter * Math.PI / 180.0) / pinionRadius)), this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
 
 		// ピニオンギアの回転角度
 		rotationRadian -= 1;
@@ -234,11 +217,10 @@ public class SpiroView extends View {
 	 */
 	public void showPopupMenu() 
 	{
-		if(isMenuPopuping){
 			JPopupMenu popup = new JPopupMenu();
 			MenuItemAction action = new MenuItemAction(this, smodel);
 
-			if(isMove){
+			if(this.smodel.isAnimated()){
 				JMenuItem stopMenuItem = new JMenuItem("stop");
 				stopMenuItem.addActionListener(action);
 				popup.add(stopMenuItem);
@@ -281,7 +263,6 @@ public class SpiroView extends View {
 			popup.add(speeddownMenuItem);
 			
 			popup.show(MenuMouseEvent.getComponent(),MenuMouseEvent.getX(),MenuMouseEvent.getY());
-		}	
 		return;
 	}
 
