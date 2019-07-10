@@ -132,7 +132,7 @@ public class SpiroModel extends Model implements Runnable {
 	 * @return
 	 */
 	public DesignLocus designLocus() {
-		return null;
+		return designLocus;
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class SpiroModel extends Model implements Runnable {
 		Point2D.Double pinionCenter = this.pinionGetCenter();
 		Point2D.Double penPosition = this.penGetPosition();
 		double pinionRadius = this.pinionGetRadius();
-
+		
 		if (!isAnimated) {
 			pinionDegrees = 0 - Math.atan2(penPosition.y - (pinionCenter.y + pinionRadius), penPosition.x - (pinionCenter.x + pinionRadius));
 		} else {
@@ -330,11 +330,11 @@ public class SpiroModel extends Model implements Runnable {
 		double pinionRadius = this.pinionGetRadius();
 		Point2D.Double pinionCenter = this.pinionGetCenter();
 
-		System.out.println(pinionCenter);
-
 		double penPositionX = pinionCenter.x + pinionRadius + penRadius * Math.cos((spurRadius - pinionRadius) * (pinionDegrees) / pinionRadius);
 		double penPositionY = pinionCenter.y + pinionRadius - penRadius * Math.sin((spurRadius - pinionRadius) * (pinionDegrees) / pinionRadius);
 
+		System.out.println(penPositionX);
+		System.out.println(penPositionY);
 		if (isAnimated) {
 			this.pinionGear.penPosition(penPositionX, penPositionY);
 		}
@@ -374,7 +374,7 @@ public class SpiroModel extends Model implements Runnable {
 				{
 
 						Thread.sleep(tickTime);
-						if(isRainbow = true){
+						if(this.isRainbow()){
 							spiroRainbow();
 						}
 
@@ -394,6 +394,9 @@ public class SpiroModel extends Model implements Runnable {
 	 * @return
 	 */
 	public void spiroClear() {
+		this.spiroGear = new SpiroGear();
+		this.spurGear = new SpurGear();
+		this.pinionGear = new PinionGear();
 		this.initialize();
 		return;
 	}
@@ -427,15 +430,14 @@ public class SpiroModel extends Model implements Runnable {
 	public void spiroRainbow() {
 		this.isRainbow = true;
 		int r = this.pinionGear.penColor().getRed();
-		int b = this.pinionGear.penColor().getGreen();
-		int g = this.pinionGear.penColor().getBlue();
-		if(r == 255 && g >= 0 && g < 255 && b == 0){ this.pinionGear.penColor(new Color(r, g+1, b)); }
-		else if(r > 0 && r <= 255 && g == 255 && b == 0){ this.pinionGear.penColor(new Color(r-1, g, b)); }
-		else if(r == 0 && g == 255 && b >= 0 && b < 255){ this.pinionGear.penColor(new Color(r, g, b+1)); }
-		else if(r == 0 && g <= 255 && g > 0 && b == 255){ this.pinionGear.penColor(new Color(r, g-1, b)); }
-		else if(r >= 0 && r < 255 && g == 0 && b == 255){ this.pinionGear.penColor(new Color(r+1, g, b)); }
-		else if(r == 255 && g == 0 && b <= 255 && b > 0){ this.pinionGear.penColor(new Color(r, g, b-1)); }
-
+		int g = this.pinionGear.penColor().getGreen();
+		int b = this.pinionGear.penColor().getBlue();		
+		if(r == 255 && (g >= 0 && g < 255) && b == 0){ this.pinionGear.penColor(new Color(r, g+5, b)); }
+		else if(r == 255 && g == 0 && (b <= 255 && b > 0)){ this.pinionGear.penColor(new Color(r, g, b-5)); }
+		else if((r > 0 && r <= 255) && g == 255 && b == 0){ this.pinionGear.penColor(new Color(r-5, g, b)); }
+		else if(r == 0 && g == 255 && (b >= 0 && b < 255)){ this.pinionGear.penColor(new Color(r, g, b+5)); }
+		else if(r == 0 && (g <= 255 && g > 0) && b == 255){ this.pinionGear.penColor(new Color(r, g-5, b)); }
+		else if((r >= 0 && r < 255) && g == 0 && b == 255){ this.pinionGear.penColor(new Color(r+5, g, b)); }
 		return;
 	}
 

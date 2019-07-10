@@ -129,8 +129,8 @@ public class SpiroView extends View {
 	}
 
 /**
- * ピニオンペンの軌跡の表示 グラフィックス・コンテキスト
- * @param aGraphics
+ * ピニオンペンの軌跡の表示
+ * @param aGraphics グラフィックス・コンテキスト
  * @param aX
  * @param aY
  */
@@ -150,10 +150,7 @@ public class SpiroView extends View {
 	 * @param aY
 	 */
 	public void displayDesignLoci(Graphics aGraphics, int aX, int aY) {
-		if (this.smodel.isAnimated()) {
-			locus.setColor(this.smodel.pinionGear().penColor());
-			locus.fillOval(aX, aY, this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
-		}
+
 	}
 
 	/**
@@ -189,14 +186,12 @@ public class SpiroView extends View {
 		Point2D.Double spurCenter = this.smodel.spurGetCenter();	// スパーギアの中心
 		double spurRadius = this.smodel.spurGetRadius(); // スパーギアの半径
 		this.smodel.pinionCenter(spurCenter.x, spurCenter.y); // ピニオンギアの中心の計算
-		Point2D.Double pinionCenter = this.smodel.pinionGetCenter(); // ピニオンギアの中心の取得
+		Point2D.Double pinionCenter = this.smodel.pinionGetCenter(); // ピニオンギアの中心
 		double pinionRadius = this.smodel.pinionGetRadius(); // ピニオンギアの半径
 		Point2D.Double penPosition = this.smodel.penGetPosition(); // ペンの位置
 		double spurDegrees = this.smodel.spurDegrees();
 		aGraphics.setColor(Color.white); // 背景色を設定
 		aGraphics.fillRect(0, 0, width, height); // 背景を塗る
-
-		System.out.println(pinionCenter);
 
 		// バッファーイメージを表示
 		aGraphics.drawImage(this.buffimg, 0, 0, this);
@@ -215,15 +210,17 @@ public class SpiroView extends View {
 		this.displayPinionPen(aGraphics, (int)penPosition.x, (int)penPosition.y);
 
 		//spurGearの描画位置
-		aGraphics.setColor(this.smodel.pinionGear().penColor());
-		aGraphics.fillRect((int)spurCenter.x - 5, (int)(spurCenter.y + spurRadius) - 5, this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
+		// aGraphics.setColor(this.smodel.pinionGear().penColor());
+		aGraphics.setColor(Color.black); // 背景色を設定
+		aGraphics.fillRect((int)spurCenter.x - 5, (int)(spurCenter.y + spurRadius) - 5, 10, 10);
 
 		//追加＿spurGearの中心の描画
-		aGraphics.setColor(this.smodel.pinionGear().penColor());
-		aGraphics.fillRect((int)(spurCenter.x + spurRadius) - 5, (int)(spurCenter.y + spurRadius) - 5, this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
+		// aGraphics.setColor(this.smodel.pinionGear().penColor());
+		aGraphics.fillRect((int)(spurCenter.x + spurRadius) - 5, (int)(spurCenter.y + spurRadius) - 5, 10, 10);
 
 		//ペンの軌跡を追加
-		this.displayDesignLoci(aGraphics, (int)(penPosition.x), (int)(penPosition.y));
+		locus.setColor(this.smodel.pinionGear().penColor());
+		locus.fillOval((int)penPosition.x, (int)penPosition.y, this.smodel.pinionGear().penNib(), this.smodel.pinionGear().penNib());
 	}
 
 	/**

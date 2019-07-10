@@ -48,7 +48,7 @@ public class Example extends Object {
 		//{
 			// 上記のモデルのビューとコンピュローラのペアを作り、ウィンドウに乗せる。
 			SpiroView aView = new SpiroView(aModel, aController);
-			JFrame aWindow = new JFrame("spirodesign");
+			JFrame aWindow = new JFrame("spiroDesign");
 			aWindow.getContentPane().add(aView);
 
 			// 高さはタイトルバーの高さを考慮してウィンドウの大きさを決定する。
