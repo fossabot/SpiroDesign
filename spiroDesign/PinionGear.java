@@ -30,7 +30,7 @@ public class PinionGear extends SpiroGear {
 		this.penNib = 10;
 	}
 
-	// public PinionGear(Cons aList) {
+	/// public PinionGear(Cons aList) {
 	//
 	// }
 

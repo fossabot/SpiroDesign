@@ -15,9 +15,9 @@ import java.awt.geom.Point2D;
 
 public class SpiroModel extends Model implements Runnable {
 
-	/**
-	 * SpurGearを束縛する
-	 */
+	/**/
+	 //* SpurGearを束縛する
+	 //*/
 	private SpurGear spurGear;
 
 	/**
@@ -26,7 +26,7 @@ public class SpiroModel extends Model implements Runnable {
 	private PinionGear pinionGear;
 
 	/**
-	 * 
+	 *
 	 */
 	private boolean isInscribe;
 
@@ -36,7 +36,7 @@ public class SpiroModel extends Model implements Runnable {
 	public boolean isRainbow;
 
 	/**
-	 * 
+	 *
 	 */
 	private DesignLocus designLocus;
 
@@ -61,17 +61,22 @@ public class SpiroModel extends Model implements Runnable {
 	private Double spurDegrees;
 
 	/**
-	 * 
+	 * ピニオンギアの中心とペンとの距離
+	 */
+	 private double penRadius;
+
+	/**
+	 *
 	 */
 	private ArrayList<DesignLocus> designLoci;
 
 	/**
-	 * 
+	 *
 	 */
 	private SpiroIO spiroIO;
 
 	/**
-	 * 
+	 *
 	 */
 	private SpiroGear spiroGear;
 
@@ -101,12 +106,14 @@ public class SpiroModel extends Model implements Runnable {
 	 */
 	public void initialize(){
 		this.isAnimated = false;
-		this.tickTime = 500;
+		this.tickTime = 10;
 		this.thread = new Thread(this);
 		this.isRainbow = false;
 		this.isAnimated = false;
 		this.spiroColor = new Color(0,0,0);
 		this.spurDegrees = 0.0;
+		this.pinionDegrees = 0.0;
+		this.penRadius = 0.0;
 		return;
 	}
 
@@ -121,7 +128,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public DesignLocus designLocus() {
@@ -129,7 +136,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public ArrayList<DesignLocus> designLoci() {
@@ -137,7 +144,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public PinionGear firstPinionGear() {
@@ -145,7 +152,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public void flush() {
@@ -153,7 +160,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isAnimated() {
@@ -161,7 +168,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isCircumscribe() {
@@ -169,7 +176,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isEditable() {
@@ -177,7 +184,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isInscribe() {
@@ -185,7 +192,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isRainbow() {
@@ -193,7 +200,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public boolean isStopped() {
@@ -201,7 +208,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public PinionGear lastPinionGear() {
@@ -209,7 +216,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public SpiroModel open() {
@@ -217,7 +224,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aModel
 	 * @return
 	 */
@@ -226,7 +233,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public void perform() {
@@ -234,7 +241,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aPoint
 	 */
 	public void pinionFirstCenter(Point aPoint) {
@@ -242,19 +249,22 @@ public class SpiroModel extends Model implements Runnable {
 		Double y = Double.valueOf(aPoint.y);
 		this.pinionGear.center(x*2.0,x*2.0);
 		this.pinionRadius(aPoint);
-		this.pinionFirstPen(x,y);
+		this.pinionFirstPen(aPoint.x, aPoint.x);
 		return;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
 	public void pinionCenter(double x, double y) {
-		Double px = Double.valueOf(x);
-		Double py = Double.valueOf(y);
-		this.pinionGear.center2(x,y);
+		double spurRadius = this.spurGetRadius();
+		double pinionRadius = this.pinionGetRadius();
+
+		Double pinionCenterX = Double.valueOf(x + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.cos(spurDegrees * Math.PI / 180.0));
+		Double pinionCenterY = Double.valueOf(y + spurRadius - pinionRadius + (spurRadius - pinionRadius) * Math.sin((spurDegrees + 180.0) * Math.PI / 180.0));
+		this.pinionGear.center(pinionCenterX, pinionCenterY);
 		return;
 	}
 
@@ -263,9 +273,30 @@ public class SpiroModel extends Model implements Runnable {
 	 * @param spurDegrees
 	 * @return
 	 */
-	public Double pinionDegrees(double spurDegrees) {
-		pinionDegrees = this.pinionGear.degrees();
+	public Double pinionDegrees() {
+		Point2D.Double pinionCenter = this.pinionGetCenter();
+		Point2D.Double penPosition = this.penGetPosition();
+		double pinionRadius = this.pinionGetRadius();
+
+		if (!isAnimated) {
+			pinionDegrees = 0 - Math.atan2(penPosition.y - (pinionCenter.y + pinionRadius), penPosition.x - (pinionCenter.x + pinionRadius));
+		} else {
+			pinionDegrees += 1 * Math.PI / 180;
+		}
+		//pinionDegrees = this.pinionGear.degrees();
 		return pinionDegrees;
+	}
+
+	public double penRadius() {
+		Point2D.Double pinionCenter = this.pinionGetCenter();
+		Point2D.Double penPosition = this.penGetPosition();
+		double pinionRadius = this.pinionGetRadius();
+
+		if (!isAnimated) {
+			penRadius = Math.sqrt(Math.pow(penPosition.x - (pinionCenter.x + pinionRadius), 2) + Math.pow(penPosition.y - (pinionCenter.y + pinionRadius), 2));
+		}
+
+		return penRadius;
 	}
 
 	/**
@@ -277,35 +308,56 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
-	public void pinionFirstPen(Double x, Double y) {
-		Point2D.Double pen = this.pinionGetCenter();
+	public void pinionFirstPen(int moveX, int moveY) {
+		Double x = Double.valueOf(moveX);
+		Double y = Double.valueOf(moveY);
+		Point2D.Double pen = this.penGetPosition();
 		this.pinionGear.penPosition(pen.x+x, pen.y+y);
 		return;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param x
 	 * @param y
 	 */
 	public void pinionPen(double x, double y) {
-		Double penx = Double.valueOf(x);
-		Double peny = Double.valueOf(y);
-		this.pinionGear.penPosition(penx, peny);
+		double spurRadius = this.spurGetRadius();
+		double pinionRadius = this.pinionGetRadius();
+		Point2D.Double pinionCenter = this.pinionGetCenter();
+
+		System.out.println(pinionCenter);
+
+		double penPositionX = pinionCenter.x + pinionRadius + penRadius * Math.cos((spurRadius - pinionRadius) * (pinionDegrees) / pinionRadius);
+		double penPositionY = pinionCenter.y + pinionRadius - penRadius * Math.sin((spurRadius - pinionRadius) * (pinionDegrees) / pinionRadius);
+
+		if (isAnimated) {
+			this.pinionGear.penPosition(penPositionX, penPositionY);
+		}
 		return;
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aPoint
 	 */
 	public void pinionRadius(Point aPoint) {
 		double x = (double)aPoint.x;
-		this.pinionGear.radius(x);
+		double spurRadius = this.spurGetRadius();
+		double pinionRadius = this.pinionGetRadius();
+		if(pinionRadius - x < 25){
+			pinionRadius = 25.0;
+			this.pinionGear.radius(pinionRadius);
+		}else if(pinionRadius - x > spurRadius - 10){
+			pinionRadius = spurRadius - 10;
+			this.pinionGear.radius(pinionRadius);
+		}else{
+			this.pinionGear.radius(pinionRadius - x);
+		}
 		return;
 	}
 
@@ -347,7 +399,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aView
 	 */
 	public void spiroCircumscribe(View aView) {
@@ -388,7 +440,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aView
 	 */
 	public void spiroDive(View aView) {
@@ -396,7 +448,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aView
 	 */
 	public void spiroInscribe(View aView) {
@@ -404,7 +456,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public SpiroModel spiroNew() {
@@ -420,7 +472,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aView
 	 */
 	public void spiroOpen(View aView) {
@@ -428,7 +480,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aView
 	 */
 	public void spiroSave(View aView) {
@@ -482,8 +534,8 @@ public void spiroStop() {
 	public void spurCenter(Point aPoint) {
 		Double x = Double.valueOf(aPoint.x);
 		Double y = Double.valueOf(aPoint.y);
-		this.spurGear.center(x,y);
-		this.spurRadius(aPoint);
+		Point2D.Double center = this.spurGetCenter();
+		this.spurGear.center(center.x+x,center.y+x);
 		return;
 	}
 
@@ -495,7 +547,9 @@ public void spiroStop() {
 	public void spurPosition(Point aPoint) {
 		Double x = Double.valueOf(aPoint.x);
 		Double y = Double.valueOf(aPoint.y);
-		this.spurGear.center(x,y);
+		Point2D.Double center = this.spurGetCenter();
+		this.spurGear.center(center.x+x,center.y+y);
+		this.pinionFirstPen(aPoint.x,aPoint.y);
 		return;
 	}
 
@@ -522,7 +576,18 @@ public void spiroStop() {
 	 */
 	public void spurRadius(Point aPoint) {
 		double x = (double)aPoint.x;
-		this.spurGear.radius(x);
+		double spurRadius = this.spurGetRadius();
+		double pinionRadius = this.pinionGetRadius();
+		if(spurRadius - x <= pinionRadius){
+
+	  }else if(spurRadius - x <= 50){
+			spurRadius = 50.0;
+			this.spurGear.radius(spurRadius);
+		}else{
+			this.spurGear.radius(spurRadius - x);
+			this.spurCenter(aPoint);
+			this.pinionFirstPen(-aPoint.x, 0);
+		}
 		return;
 	}
 
@@ -572,7 +637,7 @@ public void spiroStop() {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public String toString() {
@@ -580,7 +645,7 @@ public void spiroStop() {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public void underConstruction() {
@@ -588,7 +653,7 @@ public void spiroStop() {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aView
 	 */
 	public void underConstruction(View aView) {
@@ -596,7 +661,7 @@ public void spiroStop() {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aView
 	 * @param aString
 	 */

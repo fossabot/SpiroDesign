@@ -17,7 +17,7 @@ public class SpiroGear extends Object {
 	private Double radius;
 
 	public SpiroGear() {
-		//System.out.println("test");
+		///System.out.println("test");
 		// this.center = new Point2D.Double(400.0, 240.0);
 		// this.radius = 0.0;
 	}
@@ -65,22 +65,14 @@ public class SpiroGear extends Object {
 	}
 
 	/**
-	 * スパーギアのセンター
-	 * @param x
-	 * @param y
-	 */
+	* スパーギアのセンター
+	* @param x
+	* @param y
+	*/
 	public void center(Double x, Double y) {
-		this.center = new Point2D.Double(this.center.x+x,this.center.y+y);
-		System.out.println(this.center);
-		return;
-	}
-
-	public void center2(Double x, Double y) {
 		this.center = new Point2D.Double(x,y);
-		System.out.println(this.center);
 		return;
 	}
-
 
 	public Rectangle centerRectangle() {
 		return null;
@@ -115,10 +107,7 @@ public class SpiroGear extends Object {
 	 * @param r
 	 */
 	public void radius(Double r) {
-		this.radius = this.radius+r;
-		if(this.radius<50){
-			this.radius=50.0;
-		}
+		this.radius = r;
 		System.out.println(radius);
 		return;
 	}

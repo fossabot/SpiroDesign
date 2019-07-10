@@ -16,12 +16,12 @@ public class SpurGear extends SpiroGear {
 		this.initialize(spurFirstPoint,100.0);
 	}
 
-	// public SpurGear(Cons aList) {
+	/// public SpurGear(Cons aList) {
 	//
 	// }
 
 	/**
-	 * 
+	 *
 	 * @param p
 	 * @param r
 	 */
