@@ -49,7 +49,14 @@ public class SpiroController extends Controller implements ActionListener {
 		this.view = null;
 		this.sview = null;
 		this.smodel = new SpiroModel();
+		initialize();
 		return;
+	}
+
+	public void initialize(){
+		this.spiroprevious = new Point(0,0);
+		this.spirocurrent = new Point(0,0);
+		
 	}
 
 	public void actionPerformed(ActionEvent anActionEvent) {
