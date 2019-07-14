@@ -43,32 +43,25 @@ public class Example extends Object {
 		Integer y = (screenSize.height / 2) - (height / 2);
 		Point displayPoint = new Point(x, y);
 
-		// MVCを出現回数分だけ出現させる。
-		//for (Integer index = 0; index < howMany; index++)
-		//{
-			// 上記のモデルのビューとコンピュローラのペアを作り、ウィンドウに乗せる。
-			SpiroView aView = new SpiroView(aModel, aController);
-			JFrame aWindow = new JFrame("spiroDesign");
-			aWindow.getContentPane().add(aView);
 
-			// 高さはタイトルバーの高さを考慮してウィンドウの大きさを決定する。
-			//aWindow.addNotify();
-			Integer titleBarHeight = aWindow.getInsets().top;
-			//width = aDimension.width;
-			//height = aDimension.height + titleBarHeight;
-			//Dimension windowSize = new Dimension(width, height);
-			aWindow.setSize(800, 600);
+		// 上記のモデルのビューとコンピュローラのペアを作り、ウィンドウに乗せる。
+		SpiroView aView = new SpiroView(aModel, aController);
+		JFrame aWindow = new JFrame("spirodesign");
+		aWindow.getContentPane().add(aView);
 
-			// ウィンドウに各種の設定を行って出現させる。
-			aWindow.setMinimumSize(new Dimension(400, 300 + titleBarHeight));
-			aWindow.setResizable(true);
-			aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			x = displayPoint.x + offsetPoint.x;
-			y = displayPoint.y + offsetPoint.y;
-			aWindow.setLocation(x, y);
-			aWindow.setVisible(true);
-			aWindow.toFront();
-		//}
+		// 高さはタイトルバーの高さを考慮してウィンドウの大きさを決定する。
+		Integer titleBarHeight = aWindow.getInsets().top;
+		aWindow.setSize(800, 600);
+
+		// ウィンドウに各種の設定を行って出現させる。
+		aWindow.setMinimumSize(new Dimension(400, 300 + titleBarHeight));
+		aWindow.setResizable(true);
+		aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		x = displayPoint.x + offsetPoint.x;
+		y = displayPoint.y + offsetPoint.y;
+		aWindow.setLocation(x, y);
+		aWindow.setVisible(true);
+		aWindow.toFront();
 
 		return;
 	}

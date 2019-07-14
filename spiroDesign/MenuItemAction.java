@@ -6,21 +6,33 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
-import spiroDesign.PinionGear;
-
 public class MenuItemAction implements ActionListener {
 
+  /**
+   * SpiroViewを束縛する
+   */
   protected SpiroView sview;
 
-  protected SpiroModel smodel;
-     
-  // 表示先のテキストエリアを取得するコンストラクタ
+  /**
+   * SpiroModelを束縛する
+   */
+	protected SpiroModel smodel;
+    
+
+  /**
+   * 依存先のViewとModelを設定する
+   * @param aView 依存先のView
+   * @param aModel 依存先のModel
+   */
   public MenuItemAction(SpiroView aView, SpiroModel aModel) {
     this.sview = aView;
     this.smodel = aModel;
   }
 
-  // メニューがクリックされた際のアクション
+  /**
+   * メニューがクリックされた際のアクション
+   * @param anActionEvent 表示するコンポーネントのマウスイベント
+   */
   public void actionPerformed(ActionEvent anActionEvent) {
       // どのメニューがクリックされたかを調べる
       JMenuItem item = (JMenuItem) anActionEvent.getSource();
@@ -47,11 +59,11 @@ public class MenuItemAction implements ActionListener {
       }
       else if(text.equals("thick")) {
         this.sview.showPopupMenu();
-        if(this.smodel.pinionGear().penNib() <= 100) this.smodel.pinionGear().penNib(1);
+        if(this.smodel.pinionGear().penNib() <= 50) this.smodel.pinionGear().penNib(1);
       }
       else if(text.equals("thin")) {
         this.sview.showPopupMenu();
-        if(this.smodel.pinionGear().penNib() >= 10) this.smodel.pinionGear().penNib(-1);
+        if(this.smodel.pinionGear().penNib() >= 7) this.smodel.pinionGear().penNib(-1);
       }
       else if(text.equals("speed up")) {
         this.sview.showPopupMenu();
