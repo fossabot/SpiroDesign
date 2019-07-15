@@ -6,49 +6,59 @@ import java.util.Vector;
 import java.util.Hashtable;
 
 
+/**
+ * 
+ */
 public class DesignLocus extends Object {
 
+	/**
+	 * 
+	 */
 	private SpurGear spurGear;
 
+	/**
+	 * 
+	 */
 	private Vector<PinionGear> pinionGears;
 
+	/**
+	 * 
+	 * @param aGear
+	 */
 	public DesignLocus(SpurGear aGear) {
 
 	}
 
-	// public DesignLocus(Cons aList) {
-	//
-	// }
-
+	/**
+	 * 
+	 * @param pinionGears
+	 */
 	public void add(PinionGear pinionGears) {
 
 	}
 
-	// public Hashtable<Symbol,Object> fromList(Cons aList) {
-	// 	return null;
-	// }
-
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
 	public PinionGear get(int index) {
 		return null;
 	}
 
-	public Vector<PinionGear> pinionGears() {
-		return null;
-	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public int size() {
 		return 0;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public SpurGear spurGear() {
-		return null;
-	}
-
-	// public Cons toList() {
-	// 	return null;
-	// }
-
-	public String toString() {
 		return null;
 	}
 

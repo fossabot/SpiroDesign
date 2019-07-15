@@ -9,24 +9,14 @@ import java.awt.geom.Point2D;
 
 public class SpurGear extends SpiroGear {
 
+	/**
+	 * 
+	 * @return
+	 */
 	public SpurGear() {
 		super();
-		// Point2D.Double firstPoint = new Point2D.Double(400,240);
 		Point2D.Double spurFirstPoint = new Point2D.Double(400,240);
 		this.initialize(spurFirstPoint,100.0);
+		return;
 	}
-
-	/// public SpurGear(Cons aList) {
-	//
-	// }
-
-	/**
-	 *
-	 * @param p
-	 * @param r
-	 */
-	public SpurGear(Double p, Double r) {
-
-	}
-
 }
