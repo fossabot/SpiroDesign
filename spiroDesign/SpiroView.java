@@ -16,9 +16,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.awt.Color;
 
-//**
- //* ビュー。表示まわりを専門に行う。
- //*/
+/**
+* ビュー。表示まわりを専門に行う。
+*/
 @SuppressWarnings("serial")
 public class SpiroView extends View {
 
@@ -43,11 +43,7 @@ public class SpiroView extends View {
 	private BufferedImage buffimg;
 
 	/**
-<<<<<<< HEAD
-	 * この変数名じゃ何か分からないからあとで変える。
-=======
 	 * バッファーイメージに軌跡を書き込むためのグラフィックスコンテキスト
->>>>>>> 2b982c5da689afe08613821c3b6e05c6f34d38c4
 	 */
 	private Graphics locus;
 
@@ -192,7 +188,6 @@ public class SpiroView extends View {
 
 
 		// ピニオンギアとの距離と角度を計算
-		// ピニオンギアとペンの距離を計算
 		this.smodel.penRadius();
 
 		//penの描画

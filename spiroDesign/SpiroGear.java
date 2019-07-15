@@ -23,7 +23,7 @@ public class SpiroGear extends Object {
 	private Double radius;
 
 	/**
-	 *
+	*
 	 */
 	public SpiroGear() {
 

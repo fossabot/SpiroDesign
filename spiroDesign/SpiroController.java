@@ -33,17 +33,15 @@ public class SpiroController extends Controller implements ActionListener {
 	protected SpiroView sview;
 
 	/**
-	 *
+	*
 	 */
 	private Point spiroprevious = new Point(0,0);
 
 	/**
-	 *
 	 */
 	private Point spirocurrent = new Point(0,0);
 
 	/**
-	 *
 	 */
 	public SpiroController() {
 		super();
@@ -57,7 +55,7 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	/**
-	 *
+	 * 何もしない
 	 * @param anActionEvent
 	 */
 	// これを消したら動かない
@@ -74,8 +72,6 @@ public class SpiroController extends Controller implements ActionListener {
 
 		if (btn == MouseEvent.BUTTON1){
 			Point aPoint = aMouseEvent.getPoint();
-			System.out.println("左クリック");
-      System.out.println(aPoint);
     }
 
 		// 右クリックが行われた際、その座標を獲得してその位置にメニューを表示するようViewに依頼する。
@@ -106,7 +102,7 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	/**
-	 *
+	 *プレスが行われた時に、移動量を出してwhichPickingAreaメソッドで位置を判定する。
 	 * @param aMouseEvent
 	 */
 	public void mousePressed(MouseEvent aMouseEvent) {

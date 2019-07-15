@@ -13,11 +13,14 @@ import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import java.awt.geom.Point2D;
 
+/**
+ * モデル。データ管理を専門に行う。
+ */
 public class SpiroModel extends Model implements Runnable {
 
-	/**/
-	 //* SpurGearを束縛する
-	 //*/
+	/**
+	 * SpurGearを束縛する
+	 */
 	private SpurGear spurGear;
 
 	/**
@@ -83,6 +86,10 @@ public class SpiroModel extends Model implements Runnable {
 	//imageの描画位置
 	private Point imagePosition;
 
+
+	//imageの描画位置
+	private Point imagePosition;
+
 	/**
 	 * 線の色
 	 */
@@ -131,6 +138,11 @@ public class SpiroModel extends Model implements Runnable {
 		return;
 	}
 
+
+	public PinionGear firstPinionGear() {
+		return null;
+	}
+
 	/**
 	 *
 	 * @return
@@ -138,6 +150,13 @@ public class SpiroModel extends Model implements Runnable {
 	public boolean isAnimated() {
 		return this.isAnimated;
 	}
+
+	/**
+	 *
+	 */
+	 public boolean isClear(){
+		 return this.isClear;
+	 }
 
 	/**
 	 *
@@ -173,8 +192,6 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-<<<<<<< HEAD
-	 *
 	 * @param aPoint
 	 * ドラッグの移動距離によりピニオンギアを移動させる
 	 * @param aPoint ドラッグの移動量
@@ -214,7 +231,6 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-<<<<<<< HEAD
 	 * ペンとピニオンギアの中心を結んだ線の角度
 	 * @param spurDegrees
 	 * @return
@@ -467,7 +483,6 @@ public void spiroStop() {
 	}
 
 	/**
-	 *
 	 * スパーギアの中心とピニオンギアの中心との角度を計算し、ピニオンギアの位置を移動
 	 * @param aPoint
 	 */
@@ -588,6 +603,7 @@ public void spiroStop() {
 		Point2D.Double penPosition = this.pinionGear.penPosition();
 		return penPosition;
 	}
+
 	/**
 	 * 軌跡の座標を取得
 	 * @return
