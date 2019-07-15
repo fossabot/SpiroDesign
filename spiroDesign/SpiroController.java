@@ -17,32 +17,34 @@ import java.awt.geom.Point2D;
 
 public class SpiroController extends Controller implements ActionListener {
 
-	private int pickingArea;
-
-		/**/
-	 //* 情報を握っているModelのインスタンスを束縛する。
-	 //*/
-	protected Model model;
-
 	/**
-	 * 表示を司るViewのインスタンスを束縛する。
+	 * 
 	 */
-	protected View view;
+	private int pickingArea;
 
 	/**
 	 * 情報を握っているModelのインスタンスを束縛する。
 	 */
 	protected SpiroModel smodel;
 
-	private Point spiroprevious = new Point(0,0);
-
-	private Point spirocurrent = new Point(0,0);
-
 	/**
 	 * 表示を司るViewのインスタンスを束縛する。
 	 */
 	protected SpiroView sview;
 
+	/**
+	 * 
+	 */
+	private Point spiroprevious = new Point(0,0);
+
+	/**
+	 * 
+	 */
+	private Point spirocurrent = new Point(0,0);
+
+	/**
+	 * 
+	 */
 	public SpiroController() {
 		super();
 		this.model = null;
@@ -54,12 +56,13 @@ public class SpiroController extends Controller implements ActionListener {
 		return;
 	}
 
+	/**
+	 * 
+	 * @param anActionEvent
+	 */
+	// これを消したら動かない
 	public void actionPerformed(ActionEvent anActionEvent) {
 
-	}
-
-	public Point convertViewPointToModelPoint(Point aPoint) {
-		return null;
 	}
 
 	/**
@@ -71,8 +74,6 @@ public class SpiroController extends Controller implements ActionListener {
 
 		if (btn == MouseEvent.BUTTON1){
 			Point aPoint = aMouseEvent.getPoint();
-			System.out.println("左クリック");
-      System.out.println(aPoint);
     }
 
 		// 右クリックが行われた際、その座標を獲得してその位置にメニューを表示するようViewに依頼する。
@@ -80,15 +81,18 @@ public class SpiroController extends Controller implements ActionListener {
 			this.sview.MenuMouseEvent = aMouseEvent;
 			this.sview.showPopupMenu();
 			return;
-			}
+		}
 	}
 
+	/**
+	 * 
+	 * @param aMouseEvent
+	 */
 	public void mouseDragged(MouseEvent aMouseEvent) {
 		Cursor aCursor = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
 		Component aComponent = (Component)aMouseEvent.getSource();
 		aComponent.setCursor(aCursor);
-		System.out.println("d");
-		this.spiroprevious = this.spirocurrent;
+
 		this.spirocurrent = aMouseEvent.getPoint();
 		this.whichPickingArea(this.spirocurrent);
 		Integer x = this.spirocurrent.x - this.spiroprevious.x;
@@ -99,25 +103,17 @@ public class SpiroController extends Controller implements ActionListener {
 		return;
 	}
 
-	public void mouseMoved(MouseEvent aMouseEvent) {
-
-	}
-
+	/**
+	 * 
+	 * @param aMouseEvent
+	 */
 	public void mousePressed(MouseEvent aMouseEvent) {
-		System.out.println("p");
+		this.spirocurrent = aMouseEvent.getPoint();
+		Integer x = this.spirocurrent.x - this.spiroprevious.x;
+		Integer y = this.spirocurrent.y - this.spiroprevious.y;
 		this.spiroprevious = this.spirocurrent;
+		return;
 	}
-
-	public void mouseReleased(MouseEvent aMouseEvent) {
-		// Cursor aCursor = Cursor.getDefaultCursor();
-		// Component aComponent = (Component)aMouseEvent.getSource();
-		// aComponent.setCursor(aCursor);
-		// this.spirocurrent = aMouseEvent.getPoint();
-		// this.spiroprevious = this.spirocurrent;
-		// return;
-	}
-
-
 
 	/**
 	 * 指定されたモデルをインスタンス変数modelに設定する。
@@ -144,18 +140,12 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 
-	public String toString() {
-		StringBuffer aBuffer = new StringBuffer();
-		Class<?> aClass = this.getClass();
-		aBuffer.append(aClass.getName());
-		aBuffer.append("[model=");
-		aBuffer.append(this.smodel);
-		aBuffer.append(",view=");
-		aBuffer.append(this.sview);
-		aBuffer.append("]");
-		return aBuffer.toString();	}
-
+	/**
+	 * 
+	 * @param aPoint
+	 */
 	private void whichPickingArea(Point aPoint) {
+		if(this.smodel.isAnimated()){return;}
 		Point2D.Double spurCenter = this.smodel.spurGetCenter();
 		Double spurRadius = this.smodel.spurGetRadius();
 		Point2D.Double pinionCenter = this.smodel.pinionGetCenter();
@@ -164,15 +154,19 @@ public class SpiroController extends Controller implements ActionListener {
 		Integer x = this.spirocurrent.x - this.spiroprevious.x;
 		Integer y = this.spirocurrent.y - this.spiroprevious.y;
 		Point movePoint = new Point(x,y);
-		System.out.println(pinionCenter.x);
-		if((spurCenter.x+5>=aPoint.x)&&(spurCenter.x-5<=aPoint.x)&&(spurCenter.y+spurRadius+5>=aPoint.y)&&(spurCenter.y+spurRadius-5<=aPoint.y)){
+		if((penPosition.x + 10 >= aPoint.x) && (penPosition.x - 10 <= aPoint.x) && (penPosition.y + 10 >= aPoint.y) && (penPosition.y - 10 <= aPoint.y)){
+			this.smodel.pinionFirstPen((double)movePoint.x, (double)movePoint.y);
+		} else if((spurCenter.x + 10 >= aPoint.x) && (spurCenter.x - 10 <= aPoint.x) && (spurCenter.y + spurRadius + 10 >= aPoint.y) && (spurCenter.y+spurRadius - 10 <= aPoint.y)){
 			this.smodel.spurRadius(movePoint);
-		}else if((spurCenter.x+spurRadius+5>=aPoint.x)&&(spurCenter.x+spurRadius-5<=aPoint.x)&&(spurCenter.y+spurRadius+5>=aPoint.y)&&(spurCenter.y+spurRadius-5<=aPoint.y)){
+		}else if((spurCenter.x + spurRadius + 10 >= aPoint.x) && (spurCenter.x + spurRadius - 10 <= aPoint.x) && (spurCenter.y + spurRadius + 10 >= aPoint.y) && (spurCenter.y + spurRadius - 10 <= aPoint.y)){
 			this.smodel.spurPosition(movePoint);
-		}else if((pinionCenter.x+pinionRadius+5>=aPoint.x)&&(pinionCenter.x+pinionRadius-5<=aPoint.x)&&(pinionCenter.y+pinionRadius*2.0+5>=aPoint.y)&&(pinionCenter.y+pinionRadius*2.0-5<=aPoint.y)){
+		}else if((pinionCenter.x + pinionRadius + 10 >= aPoint.x) && (pinionCenter.x + pinionRadius - 10 <= aPoint.x) && (pinionCenter.y + pinionRadius * 2.0 + 10 >= aPoint.y) && (pinionCenter.y + pinionRadius * 2.0 - 10 <= aPoint.y)){
 			this.smodel.pinionFirstCenter(movePoint);
-		}else if((penPosition.x+5>=aPoint.x)&&(penPosition.x-5<=aPoint.x)&&(penPosition.y+5>=aPoint.y)&&(penPosition.y-5<=aPoint.y)){
-			this.smodel.pinionFirstPen(movePoint.x, movePoint.y);
+		}else  if((pinionCenter.x <= aPoint.x) && (pinionCenter.x+pinionRadius * 2 >= aPoint.x) && (pinionCenter.y <= aPoint.y) && (pinionCenter.y + pinionRadius * 2 >= aPoint.y)){
+			this.smodel.spurFirstDegrees(movePoint);
+		} else {
+			this.smodel.spurPosition(movePoint);
+			this.smodel.imageMovedPosition(movePoint);
 		}
 		return;
 	}
