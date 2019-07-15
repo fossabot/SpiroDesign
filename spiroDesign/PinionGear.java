@@ -12,14 +12,29 @@ import java.awt.geom.Point2D;
 
 public class PinionGear extends SpiroGear {
 
+	/**
+	 * 
+	 */
 	private Point2D.Double penPosition;
 
+	/**
+	 * 
+	 */
 	private Color penColor;
 
+	/**
+	 * 
+	 */
 	private int penNib;
 
+	/**
+	 * 
+	 */
 	private Double degrees;
 
+	/**
+	 * 
+	 */
 	public PinionGear() {
 		super();
 		Point2D.Double pinionFirstPoint = new Point2D.Double(700,150);
@@ -27,80 +42,66 @@ public class PinionGear extends SpiroGear {
 		this.penPosition = new Point2D.Double(590,340);
 		this.degrees = 0.0;
 		this.penColor = new Color(0,0,0);
-		this.penNib = 5;
+		this.penNib = 10;
 	}
 
-	/// public PinionGear(Cons aList) {
-	//
-	// }
-
-	public PinionGear(Double p, Double r, Double uv) {
-
-	}
-
-	public PinionGear(Double p, Double r, Double uv, Color c, int n) {
-
-	}
-
-	public PinionGear(Double p, Double r, Double uv, Color c, int n, Double d) {
-
-	}
-
-	public Double bottom() {
-		return null;
-	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Double degrees() {
 		degrees -= 1;
 		return degrees;
 	}
 
-	// public Hashtable<Symbol,Object> fromList(Cons aList) {
-	// 	return null;
-	// }
-
-	public Double left() {
-		return null;
-	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Color penColor() {
-		// System.out.println(penColor);
 		return this.penColor;
 	}
 
+	/**
+	 * 
+	 * @param aColor
+	 */
 	public void penColor(Color aColor) {
 		this.penColor = aColor;
 		return;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int penNib() {
 		return this.penNib;
 	}
 
+	/**
+	 * 
+	 * @param anlnteger
+	 */
 	public void penNib(int anlnteger) {
-		if(anlnteger > 0 && this.penNib > 0)
-			this.penNib += anlnteger;
+		this.penNib += anlnteger;
 		return;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Point2D.Double penPosition() {
 		return this.penPosition;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public void penPosition(Double x, Double y) {
 		this.penPosition = new Point2D.Double(x,y);
 	}
-
-	public Rectangle penRectangle() {
-		return null;
-	}
-
-	public Double right() {
-		return null;
-	}
-
-	public Double top() {
-		return null;
-	}
-
 }
