@@ -186,7 +186,7 @@ public class SpiroView extends View {
 		//pinionGearの描画
 		this.displayPinionGear(aGraphics, (int)pinionCenter.x, (int)pinionCenter.y);
 
-		// ピニオンギアとの距離と角度を計算
+		// ピニオンギアとペンの距離を計算
 		this.smodel.penRadius();
 
 		//penの描画
