@@ -16,9 +16,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.awt.Color;
 
-//**/
- //* ビュー。表示まわりを専門に行う。
- //*/
+/**
+* ビュー。表示まわりを専門に行う。
+*/
 @SuppressWarnings("serial")
 public class SpiroView extends View {
 

@@ -13,6 +13,9 @@ import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 import java.awt.geom.Point2D;
 
+/**
+ * モデル。データ管理を専門に行う。
+ */
 public class SpiroModel extends Model implements Runnable {
 
 	/**/
