@@ -10,6 +10,9 @@ import java.awt.Rectangle;
 import java.util.Hashtable;
 import java.awt.geom.Point2D;
 
+/**
+ * ピニオンギア周りの制御を行う
+ */
 public class PinionGear extends SpiroGear {
 
 	/**
@@ -18,19 +21,14 @@ public class PinionGear extends SpiroGear {
 	private Point2D.Double penPosition;
 
 	/**
-	 * 
+	 * ペンの色
 	 */
 	private Color penColor;
 
 	/**
-	 * 
+	 * ペンの太さ
 	 */
 	private int penNib;
-
-	/**
-	 * 
-	 */
-	private Double degrees;
 
 	/**
 	 * 
@@ -46,16 +44,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
-	 * @return
-	 */
-	public Double degrees() {
-		degrees -= 1;
-		return degrees;
-	}
-
-	/**
-	 * 
+	 * 現在の色を返す
 	 * @return
 	 */
 	public Color penColor() {
@@ -63,8 +52,8 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
-	 * @param aColor
+	 * 色を変更する
+	 * @param aColor 変える色
 	 */
 	public void penColor(Color aColor) {
 		this.penColor = aColor;
@@ -72,7 +61,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
+	 * ペンの太さを返す
 	 * @return
 	 */
 	public int penNib() {
@@ -80,8 +69,8 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
-	 * @param anlnteger
+	 * ペンの太さを変更する
+	 * @param anlnteger ペンの変化量
 	 */
 	public void penNib(int anlnteger) {
 		this.penNib += anlnteger;
