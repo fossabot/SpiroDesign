@@ -13,17 +13,17 @@ import java.awt.geom.Point2D;
 public class SpiroGear extends Object {
 
 	/**
-	 * 
+	 * spurGearとpinionGearの座標
 	 */
 	private Point2D.Double center;
 
 	/**
-	 * 
+	 * spurGearとpinionGearの半径
 	 */
 	private Double radius;
 
 	/**
-	 * 
+	 *
 	 */
 	public SpiroGear() {
 
@@ -40,8 +40,7 @@ public class SpiroGear extends Object {
 	}
 
 	/**
-	 * なんのセンター
-	 * スパーギアのセンター
+	 * spurGearとpinionGearの座標を返す
 	 * @return
 	 */
 	public Point2D.Double center() {
@@ -49,9 +48,9 @@ public class SpiroGear extends Object {
 	}
 
 	/**
-	* スパーギアのセンター
-	* @param x
-	* @param y
+	* spurGearとpinionGearの座標を更新する
+	* @param x　更新する座標のx座標
+	* @param y　更新する座標のy座標
 	*/
 	public void center(Double x, Double y) {
 		this.center = new Point2D.Double(x,y);
@@ -59,7 +58,7 @@ public class SpiroGear extends Object {
 	}
 
 	/**
-	 * 半径を返す
+	 * spurGearとpinionGearの半径を返す
 	 * @return
 	 */
 	public Double radius() {
@@ -67,12 +66,11 @@ public class SpiroGear extends Object {
 	}
 
 	/**
-	 * 半径を決める
-	 * @param r
+	 * spurGearとpinionGearの半径を返す
+	 * @param r　更新する半径
 	 */
 	public void radius(Double r) {
 		this.radius = r;
-		//System.out.println(radius);
 		return;
 	}
 

@@ -18,7 +18,7 @@ import java.awt.geom.Point2D;
 public class SpiroController extends Controller implements ActionListener {
 
 	/**
-	 * 
+	 *
 	 */
 	private int pickingArea;
 
@@ -33,17 +33,17 @@ public class SpiroController extends Controller implements ActionListener {
 	protected SpiroView sview;
 
 	/**
-	 * 
+	 *
 	 */
 	private Point spiroprevious = new Point(0,0);
 
 	/**
-	 * 
+	 *
 	 */
 	private Point spirocurrent = new Point(0,0);
 
 	/**
-	 * 
+	 *
 	 */
 	public SpiroController() {
 		super();
@@ -57,7 +57,7 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param anActionEvent
 	 */
 	// これを消したら動かない
@@ -87,7 +87,7 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * ドラッグが行われた時に、移動量を出してwhichPickingAreaメソッドで位置を判定する。
 	 * @param aMouseEvent
 	 */
 	public void mouseDragged(MouseEvent aMouseEvent) {
@@ -106,7 +106,7 @@ public class SpiroController extends Controller implements ActionListener {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aMouseEvent
 	 */
 	public void mousePressed(MouseEvent aMouseEvent) {
@@ -143,7 +143,7 @@ public class SpiroController extends Controller implements ActionListener {
 
 
 	/**
-	 * 
+	 *ドラッグしている座標を判定し、モデルに処理を渡す。
 	 * @param aPoint
 	 */
 	private void whichPickingArea(Point aPoint) {

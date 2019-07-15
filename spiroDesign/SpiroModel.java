@@ -43,7 +43,7 @@ public class SpiroModel extends Model implements Runnable {
 	/**
 	 *
 	 */
-	private DesignLocus designLocus;
+	public boolean isClear;
 
 	/**
 	 * 動いているか
@@ -73,17 +73,11 @@ public class SpiroModel extends Model implements Runnable {
 	/**
 	 *
 	 */
-	private ArrayList<DesignLocus> designLoci;
-
-	/**
-	 *
-	 */
-	private SpiroIO spiroIO;
-
-	/**
-	 *
-	 */
 	private SpiroGear spiroGear;
+
+
+	//imageの描画位置
+	private Point imagePosition;
 
 
 	//imageの描画位置
@@ -98,11 +92,6 @@ public class SpiroModel extends Model implements Runnable {
 	 * スレッド
 	 */
 	private Thread thread;
-
-	/**
-	 *
-	 */
-	private boolean botann;
 
 	/**
 	 * 初期化
@@ -132,7 +121,7 @@ public class SpiroModel extends Model implements Runnable {
 		return;
 	}
 
-		/**
+	/**
 	 * 指定されたビューを依存物に設定する。
 	 * @param aView このモデルの依存物となるビュー
 	 */
@@ -146,48 +135,26 @@ public class SpiroModel extends Model implements Runnable {
 	 *
 	 * @return
 	 */
-	public PinionGear firstPinionGear() {
-		return null;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
 	public boolean isAnimated() {
 		return this.isAnimated;
 	}
 
 	/**
 	 *
+	 * isAnimatedの状態を返す
+	 * @return isAnimated アニメーションをするかどうか判定する
 	 */
 	 public boolean isClear(){
 		 return this.isClear;
 	 }
 
 	/**
-	 *
-	 * @return
-	 */
-	public boolean isCircumscribe() {
-		return false;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public boolean isEditable() {
-		return false;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public boolean isInscribe() {
-		return false;
-	}
+	 * siClearの状態を返す
+	 * @return isClear 軌跡を消すかどうか判定する
+ 	 */
+	 public boolean isClear(){
+		 return this.isClear;
+	 }
 
 	/**
 	 *
@@ -206,8 +173,11 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
+<<<<<<< HEAD
 	 *
 	 * @param aPoint
+	 * ドラッグの移動距離によりピニオンギアを移動させる
+	 * @param aPoint ドラッグの移動量
 	 */
 	public void pinionFirstCenter(Point aPoint) {
 		Point2D.Double spurCenter = this.spurGetCenter();
@@ -229,9 +199,9 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 *
-	 * @param x
-	 * @param y
+	 * ピニオンギアの中心を求める
+	 * @param x スパーギアのx座標
+	 * @param y スパーギアのy座標
 	 */
 	public void pinionCenter(double x, double y) {
 		double spurRadius = this.spurGetRadius();
@@ -244,9 +214,12 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * ペンとピニオンギアの中心を結んだ線の角度
 	 * @param spurDegrees
 	 * @return
+	 * isAnimatedがfalseの時にペンとピニオンギアの中心を結んだ線の角度を求める
+	 * @return pinionDegrees ペンとピニオンギアの中心を結んだ線の角度
 	 */
 	public Double pinionDegrees() {
 		Point2D.Double pinionCenter = this.pinionGetCenter();
@@ -258,6 +231,10 @@ public class SpiroModel extends Model implements Runnable {
 		return this.pinionDegrees;
 	}
 
+	/**
+	 * isAnimatedがfalseの時にペンとピニオンギアの中心との距離を求める
+	 * @return penRadius ペンとピニオンギアの中心との距離
+	 */
 	public double penRadius() {
 		Point2D.Double pinionCenter = this.pinionGetCenter();
 		Point2D.Double penPosition = this.penGetPosition();
@@ -271,16 +248,16 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * ピニオンギアを返す
-	 * @return
+	 * @return pinionGear
 	 */
 	public PinionGear pinionGear() {
 		return this.pinionGear;
 	}
 
 	/**
-	 *
-	 * @param x
-	 * @param y
+	 * ペンを移動量ぶんだけ移動させる
+	 * @param moveX ペンのx方向の移動量
+	 * @param moveY ペンのy方向の移動量
 	 */
 	public void pinionFirstPen(double moveX, double moveY) {
 		Double x = Double.valueOf(moveX);
@@ -297,9 +274,9 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 *
-	 * @param x
-	 * @param y
+	 * isAnimatedがtrueの時にペンの位置を求める
+	 * @param x ピニオンギアの中心のx座標
+	 * @param y ピニオンギアの中心のy座標
 	 */
 	public void pinionPen(double x, double y) {
 		double spurRadius = this.spurGetRadius();
@@ -318,8 +295,8 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 *
-	 * @param aPoint
+	 * ピニオンギアの半径を更新する
+	 * @param aPoint 移動量
 	 */
 	public void pinionRadius(Point aPoint) {
 		double x = (double)aPoint.x;
@@ -338,8 +315,7 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * スレッドで用いる
-	 * @return
+	 * アニメーションを行う
 	 */
 	public void run() {
 
@@ -367,8 +343,7 @@ public class SpiroModel extends Model implements Runnable {
 }
 
 	/**
-	 * 初期化
-	 * @return
+	 * 軌跡の描画を消す
 	 */
 	public void spiroClear() {
 		this.isClear = true;
@@ -429,19 +404,6 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 *
-	 */
-	public void botann() {
-		if(!this.botann){
-			this.botann = true;
-		}else if(this.botann){
-			this.botann = false;
-		}
-		return;
-	}
-
-
-	/**
 	 * 回転スタート
 	 * @return
 	 */
@@ -488,12 +450,12 @@ public void spiroStop() {
 	}
 
 	/**
-	 * スパーギアの角度？
-	 * @return
+	 * スパーギアの中心とピニオンギアの中心との角度
+	 * @return spurDegrees スパーギアの角度
 	 */
 	public Double spurDegrees() {
-		if(isAnimated) spurDegrees -= 1;
-		return spurDegrees;
+		if(isAnimated) this.spurDegrees -= 1;
+		return this.spurDegrees;
 	}
 
 	/**
@@ -505,7 +467,8 @@ public void spiroStop() {
 	}
 
 	/**
-	 * 
+	 *
+	 * スパーギアの中心とピニオンギアの中心との角度を計算し、ピニオンギアの位置を移動
 	 * @param aPoint
 	 */
 	public void spurFirstDegrees(Point aPoint) {
@@ -625,7 +588,10 @@ public void spiroStop() {
 		Point2D.Double penPosition = this.pinionGear.penPosition();
 		return penPosition;
 	}
-
+	/**
+	 * 軌跡の座標を取得
+	 * @return
+	 */
 	public Point imageGetPosition(){
 		return this.imagePosition;
 	}

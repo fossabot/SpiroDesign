@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
 public class SpurGear extends SpiroGear {
 
 	/**
-	 * 
+	 * 初期化
 	 * @return
 	 */
 	public SpurGear() {

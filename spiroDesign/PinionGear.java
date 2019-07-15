@@ -13,27 +13,22 @@ import java.awt.geom.Point2D;
 public class PinionGear extends SpiroGear {
 
 	/**
-	 * 
+	 *	ペンの座標
 	 */
 	private Point2D.Double penPosition;
 
 	/**
-	 * 
+	 *ペンの色
 	 */
 	private Color penColor;
 
 	/**
-	 * 
+	 *	ペンの太さ
 	 */
 	private int penNib;
 
 	/**
-	 * 
-	 */
-	private Double degrees;
-
-	/**
-	 * 
+	 * 初期化
 	 */
 	public PinionGear() {
 		super();
@@ -46,16 +41,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
-	 * @return
-	 */
-	public Double degrees() {
-		degrees -= 1;
-		return degrees;
-	}
-
-	/**
-	 * 
+	 *　
 	 * @return
 	 */
 	public Color penColor() {
@@ -63,7 +49,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param aColor
 	 */
 	public void penColor(Color aColor) {
@@ -72,7 +58,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public int penNib() {
@@ -80,7 +66,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param anlnteger
 	 */
 	public void penNib(int anlnteger) {
@@ -89,7 +75,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
+	 *	ペンの座標を返す
 	 * @return
 	 */
 	public Point2D.Double penPosition() {
@@ -97,7 +83,7 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * 
+	 *	pwんの座標を更新する
 	 * @param x
 	 * @param y
 	 */

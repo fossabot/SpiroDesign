@@ -43,7 +43,11 @@ public class SpiroView extends View {
 	private BufferedImage buffimg;
 
 	/**
+<<<<<<< HEAD
 	 * この変数名じゃ何か分からないからあとで変える。
+=======
+	 * バッファーイメージに軌跡を書き込むためのグラフィックスコンテキスト
+>>>>>>> 2b982c5da689afe08613821c3b6e05c6f34d38c4
 	 */
 	private Graphics locus;
 
@@ -133,8 +137,8 @@ public class SpiroView extends View {
 /**
  * ピニオンペンの軌跡の表示
  * @param aGraphics グラフィックス・コンテキスト
- * @param aX
- * @param aY
+ * @param aX ペンのx座標
+ * @param aY ペンのy座標
  */
  public void displayPinionPen(Graphics aGraphics, int aX, int aY) {
 	aGraphics.setColor(this.smodel.pinionGear().penColor());
@@ -145,8 +149,8 @@ public class SpiroView extends View {
   /**
 	 * 軌跡の表示。
 	 * @param aGraphics グラフィックス・コンテキスト
-	 * @param aX
-	 * @param aY
+	 * @param aX ペンのx座標
+	 * @param aY　ペンのy座標
 	 */
 	public void displayDesignLoci(Graphics aGraphics, int aX, int aY) {
 		Point imagePosition = this.smodel.imageGetPosition();
@@ -174,6 +178,7 @@ public class SpiroView extends View {
 		aGraphics.setColor(Color.white); // 背景色を設定
 		aGraphics.fillRect(0, 0, width, height); // 背景を塗る
 
+		//isClearがtrueの時、軌跡を初期化
 		if (this.smodel.isClear()) {
 			this.initialize();
 		}
@@ -185,7 +190,9 @@ public class SpiroView extends View {
 		//pinionGearの描画
 		this.displayPinionGear(aGraphics, (int)pinionCenter.x, (int)pinionCenter.y);
 
+
 		// ピニオンギアとの距離と角度を計算
+		// ピニオンギアとペンの距離を計算
 		this.smodel.penRadius();
 
 		//penの描画
