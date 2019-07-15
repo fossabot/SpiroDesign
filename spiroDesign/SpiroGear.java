@@ -10,6 +10,9 @@ import java.util.Hashtable;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
+/**
+ * スピロギアの制御を行う
+ */
 public class SpiroGear extends Object {
 
 	/**
@@ -23,16 +26,16 @@ public class SpiroGear extends Object {
 	private Double radius;
 
 	/**
-	*
-	 */
+	*インスタンスを生成して応答する
+	*/
 	public SpiroGear() {
 
 	}
 
 	/**
 	 * 初期化
-	 * @param firstPoint
-	 * @param firstRadius
+	 * @param firstPoint 中心座標の初期値
+	 * @param firstRadius 半径の初期値
 	 */
 	public void initialize(Point2D.Double firstPoint, Double firstRadius) {
 		this.center = firstPoint;
@@ -59,7 +62,7 @@ public class SpiroGear extends Object {
 
 	/**
 	 * spurGearとpinionGearの半径を返す
-	 * @return
+	 * @return 半径
 	 */
 	public Double radius() {
 		return this.radius;

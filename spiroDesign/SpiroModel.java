@@ -29,9 +29,9 @@ public class SpiroModel extends Model implements Runnable {
 	private PinionGear pinionGear;
 
 	/**
-	 *
+	 * SpiroGearを束縛する
 	 */
-	private boolean isInscribe;
+	private SpiroGear spiroGear;
 
 	/**
 	 * レインボーかどうかを判定する
@@ -40,11 +40,6 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * ペンの軌跡をリセットするかどうか
-	 */
-	public boolean isClear;
-
-	/**
-	 *
 	 */
 	public boolean isClear;
 
@@ -72,19 +67,6 @@ public class SpiroModel extends Model implements Runnable {
 	 * ピニオンギアの中心とペンとの距離
 	 */
 	 private double penRadius;
-
-	/**
-	 *
-	 */
-	private SpiroGear spiroGear;
-
-
-	//imageの描画位置
-	private Point imagePosition;
-
-
-	//imageの描画位置
-	private Point imagePosition;
 
 
 	//imageの描画位置
@@ -138,34 +120,13 @@ public class SpiroModel extends Model implements Runnable {
 		return;
 	}
 
-
-	public PinionGear firstPinionGear() {
-		return null;
-	}
-
 	/**
-	 *
-	 * @return
+	 * isAnimatedの状態を返す
+	 * @return isAnimated アニメーションをするかどうか判定する
 	 */
 	public boolean isAnimated() {
 		return this.isAnimated;
 	}
-
-	/**
-	 *
-	 */
-	 public boolean isClear(){
-		 return this.isClear;
-	 }
-
-	/**
-	 *
-	 * isAnimatedの状態を返す
-	 * @return isAnimated アニメーションをするかどうか判定する
-	 */
-	 public boolean isClear(){
-		 return this.isClear;
-	 }
 
 	/**
 	 * siClearの状態を返す
@@ -176,19 +137,11 @@ public class SpiroModel extends Model implements Runnable {
 	 }
 
 	/**
-	 *
-	 * @return
+	 * isRainbowの状態を返す
+	 * @return isRainbow レインボーにするかどうかを判定する
 	 */
 	public boolean isRainbow() {
 		return this.isRainbow;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public boolean isStopped() {
-		return false;
 	}
 
 	/**
@@ -231,9 +184,6 @@ public class SpiroModel extends Model implements Runnable {
 	}
 
 	/**
-	 * ペンとピニオンギアの中心を結んだ線の角度
-	 * @param spurDegrees
-	 * @return
 	 * isAnimatedがfalseの時にペンとピニオンギアの中心を結んだ線の角度を求める
 	 * @return pinionDegrees ペンとピニオンギアの中心を結んだ線の角度
 	 */
@@ -369,7 +319,7 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * ペンの色を変更
-	 * @param aView
+	 * @param aView お娟を表示するView
 	 */
 	public void spiroColor(View aView) {
 		Color color = JColorChooser.showDialog(aView, "color picker", Color.white);
@@ -383,7 +333,6 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * ペンの色をレインボーに
-	 * @return
 	 */
 	public void spiroRainbow() {
 		this.isRainbow = true;
@@ -402,7 +351,6 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * スピードを下げる
-	 * @return
 	 */
 	public void spiroSpeedDown() {
 		this.tickTime += 10;
@@ -412,7 +360,6 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * スピードをあげる
-	 * @return
 	 */
 	public void spiroSpeedUp() {
 		if(this.tickTime > 10) this.tickTime -= 10;
@@ -421,7 +368,6 @@ public class SpiroModel extends Model implements Runnable {
 
 	/**
 	 * 回転スタート
-	 * @return
 	 */
 	public void spiroStart() {
 		this.isAnimated = true;
@@ -431,7 +377,6 @@ public class SpiroModel extends Model implements Runnable {
 
 /**
  * 回転ストップ
- * @return
  */
 public void spiroStop() {
 		this.isAnimated = false;
@@ -440,8 +385,8 @@ public void spiroStop() {
 }
 
 /**
- * スパーギアの中心
- * @param aPoint
+ * スパーギアの中心を取得する
+ * @param aPoint 移動量
  */
 	public void spurCenter(Point aPoint) {
 		Double x = Double.valueOf(aPoint.x);
@@ -454,7 +399,7 @@ public void spiroStop() {
 	/**
 	 * スパーギアの中心を計算する
 	 * 半径は変えない
-	 * @param aPoint
+	 * @param aPoint　移動量
 	 */
 	public void spurPosition(Point aPoint) {
 		Double x = Double.valueOf(aPoint.x);
@@ -475,8 +420,8 @@ public void spiroStop() {
 	}
 
 	/**
-	 * スパーギア
-	 * @return
+	 * スパーギアを返す
+	 * @return スパーギア
 	 */
 	public SpurGear spurGear() {
 		return spurGear;
@@ -484,7 +429,7 @@ public void spiroStop() {
 
 	/**
 	 * スパーギアの中心とピニオンギアの中心との角度を計算し、ピニオンギアの位置を移動
-	 * @param aPoint
+	 * @param aPoint 移動量
 	 */
 	public void spurFirstDegrees(Point aPoint) {
 		Point2D.Double spurCenter = this.spurGetCenter();
@@ -528,7 +473,7 @@ public void spiroStop() {
 
 	/**
 	 * スパーギアの半径
-	 * @param aPoint
+	 * @param aPoint 移動量
 	 */
 	public void spurRadius(Point aPoint) {
 		Point2D.Double spurCenter = this.spurGetCenter();
@@ -537,7 +482,6 @@ public void spiroStop() {
 		double x = (double)aPoint.x;
 		double spurRadius = this.spurGetRadius();
 		double pinionRadius = this.pinionGetRadius();
-		// this.penRadius();
 		if(spurRadius - x <= pinionRadius){
 
 	  }else if(spurRadius - x <= 50){
@@ -556,7 +500,7 @@ public void spiroStop() {
 
 	/**
 	 * スパーギアの中心を取得する
-	 * @return
+	 * @return 中心
 	 */
 	public Point2D.Double spurGetCenter() {
 		Point2D.Double center = this.spurGear.center();
@@ -570,7 +514,7 @@ public void spiroStop() {
 
 	/**
 	 * スパーギアの半径を取得する
-	 * @return
+	 * @return 半径
 	 */
 	public Double spurGetRadius() {
 		Double radius = this.spurGear.radius();
@@ -579,7 +523,7 @@ public void spiroStop() {
 
 	/**
 	 * ピニオンギアの中心座標を取得する
-	 * @return
+	 * @return 中心座標
 	 */
 	public Point2D.Double pinionGetCenter() {
 		Point2D.Double center = this.pinionGear.center();
@@ -597,7 +541,7 @@ public void spiroStop() {
 
 	/**
 	 * ペンの位置を取得
-	 * @return
+	 * @return ペンの位置の座標
 	 */
 	public Point2D.Double penGetPosition(){
 		Point2D.Double penPosition = this.pinionGear.penPosition();
@@ -606,18 +550,11 @@ public void spiroStop() {
 
 	/**
 	 * 軌跡の座標を取得
-	 * @return
+	 * @return 軌跡の座標
 	 */
 	public Point imageGetPosition(){
 		return this.imagePosition;
 	}
 
-	/**
-	 *
-	 * @return
-	 */
-	public String toString() {
-		return null;
-	}
 
 }

@@ -38,13 +38,11 @@ public class PinionGear extends SpiroGear {
 		Point2D.Double pinionFirstPoint = new Point2D.Double(700,150);
 		this.initialize(pinionFirstPoint,25.0);
 		this.penPosition = new Point2D.Double(590,340);
-		this.degrees = 0.0;
 		this.penColor = new Color(0,0,0);
 		this.penNib = 10;
 	}
 
 	/**
-	 *　
 	 * 現在の色を返す
 	 * @return
 	 */
@@ -53,7 +51,6 @@ public class PinionGear extends SpiroGear {
 	}
 
 	/**
-	 * @param aColor
 	 * 色を変更する
 	 * @param aColor 変える色
 	 */
@@ -64,7 +61,7 @@ public class PinionGear extends SpiroGear {
 
 	/**
 	 * ペンの太さを返す
-	 * @return
+	 * @return ペンの太さ
 	 */
 	public int penNib() {
 		return this.penNib;
@@ -81,7 +78,7 @@ public class PinionGear extends SpiroGear {
 
 	/**
 	 *	ペンの座標を返す
-	 * @return
+	 * @return ペンの座標
 	 */
 	public Point2D.Double penPosition() {
 		return this.penPosition;
@@ -89,8 +86,8 @@ public class PinionGear extends SpiroGear {
 
 	/**
 	 *	ペンの座標を更新する
-	 * @param x
-	 * @param y
+	 * @param x　ペンのx座標
+	 * @param y　ペンのy座標
 	 */
 	public void penPosition(Double x, Double y) {
 		this.penPosition = new Point2D.Double(x,y);

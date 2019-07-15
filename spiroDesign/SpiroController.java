@@ -15,12 +15,10 @@ import java.awt.event.MouseWheelListener;
 import javax.swing.event.MouseInputAdapter;
 import java.awt.geom.Point2D;
 
+/**
+ * コントローラ。制御まわりを専門に行う。
+ */
 public class SpiroController extends Controller implements ActionListener {
-
-	/**
-	 *
-	 */
-	private int pickingArea;
 
 	/**
 	 * 情報を握っているModelのインスタンスを束縛する。
@@ -33,15 +31,17 @@ public class SpiroController extends Controller implements ActionListener {
 	protected SpiroView sview;
 
 	/**
-	*
-	 */
-	private Point spiroprevious = new Point(0,0);
+	* ドラッグ開始位置の座標
+	*/
+	private Point spiroprevious;
 
 	/**
+	 * ドラッグで移動した位置の座標
 	 */
-	private Point spirocurrent = new Point(0,0);
+	private Point spirocurrent;
 
 	/**
+	 * インスタンスを生成して応答する
 	 */
 	public SpiroController() {
 		super();
@@ -56,16 +56,15 @@ public class SpiroController extends Controller implements ActionListener {
 
 	/**
 	 * 何もしない
-	 * @param anActionEvent
+	 * @param anActionEvent アクションイベント
 	 */
-	// これを消したら動かない
 	public void actionPerformed(ActionEvent anActionEvent) {
 
 	}
 
 	/**
 	 * 右クリックが行われた際、その座標を獲得してその位置にメニューを表示するようViewに依頼する。
-	 * @param aMouseEvent
+	 * @param aMouseEvent マウスイベント
 	 */
 	public void mouseClicked(MouseEvent aMouseEvent) {
 		int btn = aMouseEvent.getButton();
@@ -84,7 +83,7 @@ public class SpiroController extends Controller implements ActionListener {
 
 	/**
 	 * ドラッグが行われた時に、移動量を出してwhichPickingAreaメソッドで位置を判定する。
-	 * @param aMouseEvent
+	 * @param aMouseEvent マウスイベント
 	 */
 	public void mouseDragged(MouseEvent aMouseEvent) {
 		Cursor aCursor = Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR);
@@ -103,7 +102,7 @@ public class SpiroController extends Controller implements ActionListener {
 
 	/**
 	 *プレスが行われた時に、移動量を出してwhichPickingAreaメソッドで位置を判定する。
-	 * @param aMouseEvent
+	 * @param aMouseEvent マウスイベント
 	 */
 	public void mousePressed(MouseEvent aMouseEvent) {
 		this.spirocurrent = aMouseEvent.getPoint();
@@ -140,7 +139,7 @@ public class SpiroController extends Controller implements ActionListener {
 
 	/**
 	 *ドラッグしている座標を判定し、モデルに処理を渡す。
-	 * @param aPoint
+	 *@param aPoint 移動する前の座標
 	 */
 	private void whichPickingArea(Point aPoint) {
 		if(this.smodel.isAnimated()){return;}

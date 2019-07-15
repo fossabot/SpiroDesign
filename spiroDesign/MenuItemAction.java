@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
+/**
+ * メニューが押された時のアクションを設定する
+ */
 public class MenuItemAction implements ActionListener {
 
   /**

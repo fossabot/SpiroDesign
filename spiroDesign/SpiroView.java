@@ -253,19 +253,4 @@ public class SpiroView extends View {
 		return;
 	}
 
-	/**
-	 * このインスタンスを文字列にして応答する。
-	 * @return 自分自身を表す文字列
-	 */
-	public String toString()
-	{
-		StringBuffer aBuffer = new StringBuffer();
-		Class<?> aClass = this.getClass();
-		aBuffer.append(aClass.getName());
-		aBuffer.append("[model=");
-		aBuffer.append(this.smodel);
-		aBuffer.append("]");
-		return aBuffer.toString();
-	}
-
 }
